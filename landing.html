@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build Your Custom Rod — Riverside Rodworks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progress-bar">
+    <div class="progress-labels">
+      <div class="progress-label" data-seg="quiz">Quiz</div>
+      <div class="progress-label" data-seg="build">Build</div>
+      <div class="progress-label" data-seg="quote">Quote</div>
+    </div>
+    <div class="progress-track">
+      <div class="progress-segment" data-seg="quiz"></div>
+      <div class="progress-segment" data-seg="build"></div>
+      <div class="progress-segment" data-seg="quote"></div>
+    </div>
+  </div>
+
+  <!-- Back Button -->
+  <button class="back-btn" id="back-btn" aria-label="Go back">&larr; Back</button>
+
+  <!-- STEP 0: Hero -->
+  <section class="step active" data-step="0">
+    <nav class="landing-nav">
+      <a href="index-a.html" class="nav-logo">Riverside Rodworks</a>
+      <a href="index-a.html" class="back-link">Back to Home</a>
+    </nav>
+    <div class="hero-landing">
+      <h1>Your Perfect Rod Doesn't Exist Yet.</h1>
+      <h2 class="subhead">Let's Build It.</h2>
+      <p>Answer a few quick questions, design your dream rod, and get a custom quote — all in about 60 seconds.</p>
+      <button class="btn btn-primary btn-lg" id="start-btn">Start Building &rarr;</button>
+      <div class="trust-row">
+        <span>500+ Rods Built</span>
+        <div class="divider"></div>
+        <span>Mud Hole Components</span>
+        <div class="divider"></div>
+        <span>Satisfaction Guaranteed</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 1: Fishing Type -->
+  <section class="step" data-step="1">
+    <div class="step-inner">
+      <h2>What kind of fishing do you do most?</h2>
+      <p>&nbsp;</p>
+      <div class="quiz-grid cols-3">
+        <div class="quiz-card quiz-card--lg has-bg" data-field="fishingType" data-value="freshwater-bass" style="--card-bg: linear-gradient(135deg, #1a3a2a 0%, #0f1f15 100%);">
+          <span class="card-icon">🐟</span>
+          <span class="card-label">Freshwater Bass</span>
+        </div>
+        <div class="quiz-card quiz-card--lg has-bg" data-field="fishingType" data-value="inshore-saltwater" style="--card-bg: linear-gradient(135deg, #1a3a4a 0%, #0f1f2a 100%);">
+          <span class="card-icon">🌊</span>
+          <span class="card-label">Inshore Saltwater</span>
+        </div>
+        <div class="quiz-card quiz-card--lg has-bg" data-field="fishingType" data-value="offshore" style="--card-bg: linear-gradient(135deg, #0f1a3a 0%, #080e1f 100%);">
+          <span class="card-icon">🚤</span>
+          <span class="card-label">Offshore</span>
+        </div>
+        <div class="quiz-card quiz-card--lg has-bg" data-field="fishingType" data-value="fly-fishing" style="--card-bg: linear-gradient(135deg, #2a3a1a 0%, #1a2510 100%);">
+          <span class="card-icon">🪶</span>
+          <span class="card-label">Fly Fishing</span>
+        </div>
+        <div class="quiz-card quiz-card--lg has-bg" data-field="fishingType" data-value="ice-fishing" style="--card-bg: linear-gradient(135deg, #2a3a4a 0%, #1a2535 100%);">
+          <span class="card-icon">❄️</span>
+          <span class="card-label">Ice Fishing</span>
+        </div>
+        <div class="quiz-card quiz-card--lg has-bg" data-field="fishingType" data-value="other" style="--card-bg: linear-gradient(135deg, #2a1a3a 0%, #1a1025 100%);">
+          <span class="card-icon">✨</span>
+          <span class="card-label">Other / Custom</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2: Order Type -->
+  <section class="step" data-step="2">
+    <div class="step-inner">
+      <h2>Is this for yourself or a larger order?</h2>
+      <p>&nbsp;</p>
+      <div class="quiz-grid">
+        <div class="quiz-card" data-field="orderType" data-value="individual">
+          <span class="card-icon">1️⃣</span>
+          <span class="card-label">Individual Rod</span>
+          <span class="card-desc">One custom rod, built just for you</span>
+        </div>
+        <div class="quiz-card" data-field="orderType" data-value="small-batch">
+          <span class="card-icon">🔢</span>
+          <span class="card-label">Small Batch</span>
+          <span class="card-desc">2–5 rods, same or different builds</span>
+        </div>
+        <div class="quiz-card" data-field="orderType" data-value="bulk">
+          <span class="card-icon">🏢</span>
+          <span class="card-label">Bulk / Team Order</span>
+          <span class="card-desc">6+ rods for your team, club, or fleet</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3: Priorities (multi-select) -->
+  <section class="step" data-step="3">
+    <div class="step-inner">
+      <h2>What matters most to you?</h2>
+      <p>Pick up to 2</p>
+      <div class="quiz-grid multi-select">
+        <div class="quiz-card" data-field="priorities" data-value="performance">
+          <span class="card-icon">⚡</span>
+          <span class="card-label">Performance &amp; Sensitivity</span>
+        </div>
+        <div class="quiz-card" data-field="priorities" data-value="aesthetics">
+          <span class="card-icon">🎨</span>
+          <span class="card-label">Aesthetics &amp; Custom Look</span>
+        </div>
+        <div class="quiz-card" data-field="priorities" data-value="durability">
+          <span class="card-icon">🛡️</span>
+          <span class="card-label">Durability &amp; Toughness</span>
+        </div>
+        <div class="quiz-card" data-field="priorities" data-value="lightweight">
+          <span class="card-icon">🪶</span>
+          <span class="card-label">Lightweight Feel</span>
+        </div>
+        <div class="quiz-card" data-field="priorities" data-value="value">
+          <span class="card-icon">💰</span>
+          <span class="card-label">Value for Money</span>
+        </div>
+      </div>
+      <button class="btn-next" id="priorities-next" disabled>Next &rarr;</button>
+    </div>
+  </section>
+
+  <!-- STEP 4: Experience Level -->
+  <section class="step" data-step="4">
+    <div class="step-inner">
+      <h2>How would you describe yourself?</h2>
+      <p>&nbsp;</p>
+      <div class="quiz-grid">
+        <div class="quiz-card" data-field="experience" data-value="weekend">
+          <span class="card-label">Weekend Warrior</span>
+          <span class="card-desc">I fish when I can — weekends, vacations</span>
+        </div>
+        <div class="quiz-card" data-field="experience" data-value="serious">
+          <span class="card-label">Serious Angler</span>
+          <span class="card-desc">50+ days on the water per year</span>
+        </div>
+        <div class="quiz-card" data-field="experience" data-value="tournament">
+          <span class="card-label">Tournament Competitor</span>
+          <span class="card-desc">I fish to win</span>
+        </div>
+        <div class="quiz-card" data-field="experience" data-value="guide">
+          <span class="card-label">Guide / Charter Captain</span>
+          <span class="card-desc">Fishing is my business</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 5: Budget -->
+  <section class="step" data-step="5">
+    <div class="step-inner">
+      <h2>What's your budget range per rod?</h2>
+      <p>&nbsp;</p>
+      <div class="quiz-grid">
+        <div class="quiz-card" data-field="budget" data-value="200-400">
+          <span class="card-label">$200 – $400</span>
+        </div>
+        <div class="quiz-card" data-field="budget" data-value="400-600">
+          <span class="card-label">$400 – $600</span>
+        </div>
+        <div class="quiz-card" data-field="budget" data-value="600-800">
+          <span class="card-label">$600 – $800</span>
+        </div>
+        <div class="quiz-card" data-field="budget" data-value="800-plus">
+          <span class="card-label">$800+</span>
+        </div>
+        <div class="quiz-card" data-field="budget" data-value="unsure">
+          <span class="card-label">Not sure yet</span>
+          <span class="card-desc">No pressure — we'll work with you</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 6: Builder -->
+  <section class="step" data-step="6">
+    <div class="step-inner">
+      <div class="quiz-summary" id="quiz-summary"></div>
+
+      <!-- Price Estimate -->
+      <div class="price-estimate" id="price-estimate">
+        <span class="price-label">Estimated Starting Price</span>
+        <span class="price-value" id="price-value">$350</span>
+        <span class="price-note">Final quote may vary based on specifications</span>
+      </div>
+
+      <h2 id="builder-heading">Let's Design Your Rod</h2>
+      <p>&nbsp;</p>
+      <div class="builder-layout">
+        <!-- Left: Panels -->
+        <div class="builder-panels">
+
+          <!-- Handle Style -->
+          <div class="builder-panel">
+            <h3>Handle Style</h3>
+            <div class="panel-options">
+              <div class="option-card selected" data-handle="cork">
+                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2" y="4" width="36" height="16" rx="3" fill="#d4a574"/>
+                  <line x1="8" y1="6" x2="8" y2="20" stroke="#c4935a" stroke-width="0.5"/>
+                  <line x1="14" y1="6" x2="14" y2="20" stroke="#c4935a" stroke-width="0.5"/>
+                  <line x1="20" y1="6" x2="20" y2="20" stroke="#c4935a" stroke-width="0.5"/>
+                  <line x1="26" y1="6" x2="26" y2="20" stroke="#c4935a" stroke-width="0.5"/>
+                  <line x1="32" y1="6" x2="32" y2="20" stroke="#c4935a" stroke-width="0.5"/>
+                </svg>
+                <span>Full Cork</span>
+              </div>
+              <div class="option-card" data-handle="split-grip">
+                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2" y="4" width="14" height="16" rx="3" fill="#d4a574"/>
+                  <rect x="24" y="4" width="14" height="16" rx="3" fill="#d4a574"/>
+                  <rect x="16" y="8" width="8" height="8" rx="1" fill="#555" opacity="0.4"/>
+                </svg>
+                <span>Split Grip</span>
+              </div>
+              <div class="option-card" data-handle="eva">
+                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2" y="4" width="36" height="16" rx="3" fill="#333"/>
+                  <rect x="2" y="4" width="36" height="16" rx="3" fill="url(#eva-texture)" opacity="0.3"/>
+                  <defs><pattern id="eva-texture" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.5" fill="#555"/></pattern></defs>
+                </svg>
+                <span>EVA Foam</span>
+              </div>
+              <div class="option-card" data-handle="hybrid">
+                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2" y="4" width="18" height="16" rx="3" fill="#d4a574"/>
+                  <rect x="20" y="4" width="18" height="16" rx="0 3 3 0" fill="#333"/>
+                  <line x1="8" y1="6" x2="8" y2="20" stroke="#c4935a" stroke-width="0.5"/>
+                  <line x1="14" y1="6" x2="14" y2="20" stroke="#c4935a" stroke-width="0.5"/>
+                </svg>
+                <span>Hybrid</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reel Seat -->
+          <div class="builder-panel">
+            <h3>Reel Seat</h3>
+            <div class="panel-options cols-3">
+              <div class="option-card selected" data-reelseat="fuji">
+                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="3" width="28" height="18" rx="2" fill="#555"/>
+                  <rect x="8" y="6" width="24" height="4" rx="1" fill="#777"/>
+                  <rect x="8" y="14" width="24" height="4" rx="1" fill="#777"/>
+                  <circle cx="20" cy="12" r="2" fill="#999"/>
+                </svg>
+                <span>Fuji DPS</span>
+              </div>
+              <div class="option-card" data-reelseat="fuji-skeleton">
+                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="5" width="28" height="3" rx="1" fill="#555"/>
+                  <rect x="6" y="16" width="28" height="3" rx="1" fill="#555"/>
+                  <rect x="8" y="5" width="4" height="14" rx="1" fill="#444"/>
+                  <rect x="28" y="5" width="4" height="14" rx="1" fill="#444"/>
+                  <circle cx="20" cy="12" r="2" fill="#666" stroke="#888" stroke-width="0.5"/>
+                </svg>
+                <span>Fuji Skeleton</span>
+              </div>
+              <div class="option-card" data-reelseat="custom-engraved">
+                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="3" width="28" height="18" rx="2" fill="#666"/>
+                  <rect x="10" y="7" width="20" height="10" rx="1" fill="none" stroke="#999" stroke-width="0.5" stroke-dasharray="2 1"/>
+                  <text x="20" y="14" text-anchor="middle" fill="#bbb" font-size="5" font-family="serif" font-style="italic">RRW</text>
+                </svg>
+                <span>Custom Engraved</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Thread Wraps -->
+          <div class="builder-panel">
+            <h3>Thread Wraps</h3>
+            <div class="pattern-selector">
+              <div class="pattern-option selected" data-pattern="single">
+                <svg class="pattern-preview" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="4" y="4" width="40" height="16" rx="2" fill="#1a1a2e"/>
+                  <line x1="8" y1="8" x2="40" y2="8" stroke="#2a2a4e" stroke-width="1"/>
+                  <line x1="8" y1="12" x2="40" y2="12" stroke="#2a2a4e" stroke-width="1"/>
+                  <line x1="8" y1="16" x2="40" y2="16" stroke="#2a2a4e" stroke-width="1"/>
+                </svg>
+                <span>Single Color</span>
+              </div>
+              <div class="pattern-option" data-pattern="tiger">
+                <svg class="pattern-preview" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="4" y="4" width="40" height="16" rx="2" fill="#1a1a2e"/>
+                  <line x1="10" y1="4" x2="14" y2="20" stroke="#c9a84c" stroke-width="2"/>
+                  <line x1="18" y1="4" x2="22" y2="20" stroke="#c9a84c" stroke-width="2"/>
+                  <line x1="26" y1="4" x2="30" y2="20" stroke="#c9a84c" stroke-width="2"/>
+                  <line x1="34" y1="4" x2="38" y2="20" stroke="#c9a84c" stroke-width="2"/>
+                </svg>
+                <span>Tiger Wrap</span>
+              </div>
+              <div class="pattern-option" data-pattern="diamond">
+                <svg class="pattern-preview" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="4" y="4" width="40" height="16" rx="2" fill="#1a1a2e"/>
+                  <path d="M12 4L20 12L12 20M20 4L28 12L20 20M28 4L36 12L28 20" stroke="#c9a84c" stroke-width="1" fill="none"/>
+                  <path d="M12 20L20 12L12 4M20 20L28 12L20 4M28 20L36 12L28 4" stroke="#c9a84c" stroke-width="1" fill="none" opacity="0.5"/>
+                </svg>
+                <span>Diamond</span>
+              </div>
+              <div class="pattern-option" data-pattern="spiral">
+                <svg class="pattern-preview" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="4" y="4" width="40" height="16" rx="2" fill="#1a1a2e"/>
+                  <path d="M8 20C12 4 16 20 20 4C24 20 28 4 32 20C36 4 40 20 44 4" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+                </svg>
+                <span>Spiral</span>
+              </div>
+            </div>
+            <div class="color-swatches">
+              <div class="swatch-wrap">
+                <div class="color-swatch selected" data-color="#1a1a2e" style="background:#1a1a2e;"></div>
+                <span class="swatch-label">Midnight</span>
+              </div>
+              <div class="swatch-wrap">
+                <div class="color-swatch" data-color="#8b0000" style="background:#8b0000;"></div>
+                <span class="swatch-label">Crimson</span>
+              </div>
+              <div class="swatch-wrap">
+                <div class="color-swatch" data-color="#1b4332" style="background:#1b4332;"></div>
+                <span class="swatch-label">Forest</span>
+              </div>
+              <div class="swatch-wrap">
+                <div class="color-swatch" data-color="#1a3a6c" style="background:#1a3a6c;"></div>
+                <span class="swatch-label">Royal Blue</span>
+              </div>
+              <div class="swatch-wrap">
+                <div class="color-swatch" data-color="#b87333" style="background:#b87333;"></div>
+                <span class="swatch-label">Copper</span>
+              </div>
+              <div class="swatch-wrap">
+                <div class="color-swatch" data-color="#f5f5f0" style="background:#f5f5f0;"></div>
+                <span class="swatch-label">Pearl White</span>
+              </div>
+              <div class="swatch-wrap">
+                <div class="color-swatch" data-color="#722f37" style="background:#722f37;"></div>
+                <span class="swatch-label">Burgundy</span>
+              </div>
+              <div class="swatch-wrap">
+                <div class="color-swatch custom" data-color="custom"></div>
+                <span class="swatch-label">Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rod Length -->
+          <div class="builder-panel">
+            <h3>Rod Length</h3>
+            <div class="length-segments">
+              <div class="length-seg" data-length="6-0-to-6-6">6'0"–6'6"</div>
+              <div class="length-seg selected" data-length="6-6-to-7-0">6'6"–7'0"</div>
+              <div class="length-seg" data-length="7-0-to-7-6">7'0"–7'6"</div>
+              <div class="length-seg" data-length="7-6-plus">7'6"+</div>
+            </div>
+          </div>
+
+          <!-- Guide Type -->
+          <div class="builder-panel">
+            <h3>Guide Type</h3>
+            <div class="panel-options cols-3">
+              <div class="option-card selected" data-guidetype="standard">
+                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="20" cy="8" r="5" stroke="#999" stroke-width="1.5" fill="none"/>
+                  <line x1="20" y1="13" x2="20" y2="22" stroke="#999" stroke-width="1.5"/>
+                  <line x1="16" y1="22" x2="24" y2="22" stroke="#999" stroke-width="1"/>
+                </svg>
+                <span>Standard</span>
+              </div>
+              <div class="option-card" data-guidetype="micro">
+                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="20" cy="10" r="3" stroke="#999" stroke-width="1.5" fill="none"/>
+                  <line x1="20" y1="13" x2="20" y2="20" stroke="#999" stroke-width="1"/>
+                  <line x1="17" y1="20" x2="23" y2="20" stroke="#999" stroke-width="0.75"/>
+                </svg>
+                <span>Micro Guides</span>
+              </div>
+              <div class="option-card" data-guidetype="heavy-duty">
+                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="20" cy="6" r="7" stroke="#999" stroke-width="2" fill="none"/>
+                  <line x1="20" y1="13" x2="20" y2="22" stroke="#999" stroke-width="2"/>
+                  <line x1="14" y1="22" x2="26" y2="22" stroke="#999" stroke-width="1.5"/>
+                </svg>
+                <span>Heavy Duty</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grip Material -->
+          <div class="builder-panel">
+            <h3>Grip Material</h3>
+            <div class="panel-options cols-3">
+              <div class="option-card selected" data-grip="cork">
+                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="4" y="4" width="32" height="16" rx="4" fill="#c4935a"/>
+                  <circle cx="12" cy="10" r="1" fill="#b8834a" opacity="0.6"/>
+                  <circle cx="20" cy="14" r="1.5" fill="#b8834a" opacity="0.6"/>
+                  <circle cx="28" cy="9" r="1" fill="#b8834a" opacity="0.6"/>
+                  <circle cx="16" cy="16" r="0.8" fill="#b8834a" opacity="0.5"/>
+                  <circle cx="24" cy="8" r="0.8" fill="#b8834a" opacity="0.5"/>
+                </svg>
+                <span>Premium Cork</span>
+              </div>
+              <div class="option-card" data-grip="hypalon">
+                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="4" y="4" width="32" height="16" rx="4" fill="#2a2a2a"/>
+                  <line x1="8" y1="8" x2="12" y2="16" stroke="#3a3a3a" stroke-width="0.5"/>
+                  <line x1="14" y1="8" x2="18" y2="16" stroke="#3a3a3a" stroke-width="0.5"/>
+                  <line x1="20" y1="8" x2="24" y2="16" stroke="#3a3a3a" stroke-width="0.5"/>
+                  <line x1="26" y1="8" x2="30" y2="16" stroke="#3a3a3a" stroke-width="0.5"/>
+                  <line x1="32" y1="8" x2="36" y2="16" stroke="#3a3a3a" stroke-width="0.5"/>
+                </svg>
+                <span>Hypalon</span>
+              </div>
+              <div class="option-card" data-grip="eva">
+                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="4" y="4" width="32" height="16" rx="4" fill="#3a3a3a"/>
+                  <rect x="4" y="4" width="32" height="16" rx="4" fill="url(#grip-eva-tex)" opacity="0.3"/>
+                  <defs><pattern id="grip-eva-tex" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="0.4" fill="#555"/></pattern></defs>
+                </svg>
+                <span>EVA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Rod Preview (SVG) -->
+        <div class="rod-preview-col">
+          <div class="rod-preview" id="rod-preview">
+            <svg class="rod-assembly-svg" viewBox="0 0 450 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Shadow -->
+              <ellipse cx="225" cy="72" rx="180" ry="4" fill="rgba(0,0,0,0.15)"/>
+
+              <!-- Grip -->
+              <rect class="svg-grip" x="8" y="28" width="48" height="20" rx="5" fill="#c4935a"/>
+              <!-- Cork texture dots -->
+              <circle cx="18" cy="35" r="1" fill="#b8834a" opacity="0.4"/>
+              <circle cx="28" cy="40" r="1.2" fill="#b8834a" opacity="0.4"/>
+              <circle cx="38" cy="34" r="0.8" fill="#b8834a" opacity="0.4"/>
+              <circle cx="45" cy="42" r="1" fill="#b8834a" opacity="0.4"/>
+
+              <!-- Handle -->
+              <rect class="svg-handle" x="56" y="30" width="60" height="16" rx="3" fill="#d4a574"/>
+              <!-- Handle texture lines -->
+              <line x1="64" y1="32" x2="64" y2="44" stroke="#c4935a" stroke-width="0.4" opacity="0.5"/>
+              <line x1="72" y1="32" x2="72" y2="44" stroke="#c4935a" stroke-width="0.4" opacity="0.5"/>
+              <line x1="80" y1="32" x2="80" y2="44" stroke="#c4935a" stroke-width="0.4" opacity="0.5"/>
+              <line x1="88" y1="32" x2="88" y2="44" stroke="#c4935a" stroke-width="0.4" opacity="0.5"/>
+              <line x1="96" y1="32" x2="96" y2="44" stroke="#c4935a" stroke-width="0.4" opacity="0.5"/>
+              <line x1="104" y1="32" x2="104" y2="44" stroke="#c4935a" stroke-width="0.4" opacity="0.5"/>
+
+              <!-- Reel Seat -->
+              <rect class="svg-reelseat" x="116" y="31" width="32" height="14" rx="2" fill="#555"/>
+              <rect x="120" y="34" width="10" height="3" rx="1" fill="#777" opacity="0.6"/>
+              <rect x="120" y="39" width="10" height="3" rx="1" fill="#777" opacity="0.6"/>
+              <circle cx="138" cy="38" r="2" fill="#888" opacity="0.5"/>
+
+              <!-- Rod Blank (main shaft) -->
+              <path class="svg-blank" d="M148 38 L148 34 Q300 32 430 36 L430 38 Q300 40 148 38Z" fill="var(--accent, #c9a84c)"/>
+
+              <!-- Guide wraps (colored bands on blank) -->
+              <rect class="svg-wrap" x="180" y="33" width="8" height="8" rx="1" fill="#1a1a2e"/>
+              <rect class="svg-wrap" x="220" y="33.5" width="7" height="7" rx="1" fill="#1a1a2e"/>
+              <rect class="svg-wrap" x="260" y="34" width="6" height="6" rx="1" fill="#1a1a2e"/>
+              <rect class="svg-wrap" x="300" y="34.5" width="5" height="5" rx="1" fill="#1a1a2e"/>
+              <rect class="svg-wrap" x="345" y="35" width="4" height="4" rx="1" fill="#1a1a2e"/>
+              <rect class="svg-wrap" x="385" y="35.5" width="3" height="3" rx="0.5" fill="#1a1a2e"/>
+
+              <!-- Guides (rings on feet) -->
+              <g class="svg-guide" stroke="#1a1a2e" stroke-width="1.5" fill="none">
+                <circle cx="184" cy="25" r="6"/>
+                <line x1="184" y1="31" x2="184" y2="33"/>
+              </g>
+              <g class="svg-guide" stroke="#1a1a2e" stroke-width="1.5" fill="none">
+                <circle cx="223" cy="27" r="5"/>
+                <line x1="223" y1="32" x2="223" y2="33.5"/>
+              </g>
+              <g class="svg-guide" stroke="#1a1a2e" stroke-width="1.3" fill="none">
+                <circle cx="263" cy="28" r="4.5"/>
+                <line x1="263" y1="32.5" x2="263" y2="34"/>
+              </g>
+              <g class="svg-guide" stroke="#1a1a2e" stroke-width="1.2" fill="none">
+                <circle cx="302" cy="29" r="4"/>
+                <line x1="302" y1="33" x2="302" y2="34.5"/>
+              </g>
+              <g class="svg-guide" stroke="#1a1a2e" stroke-width="1" fill="none">
+                <circle cx="347" cy="30" r="3"/>
+                <line x1="347" y1="33" x2="347" y2="35"/>
+              </g>
+              <g class="svg-guide" stroke="#1a1a2e" stroke-width="0.8" fill="none">
+                <circle cx="387" cy="31.5" r="2.5"/>
+                <line x1="387" y1="34" x2="387" y2="35.5"/>
+              </g>
+
+              <!-- Rod Tip -->
+              <polygon class="svg-tip" points="430,35.5 440,37 430,38.5" fill="var(--accent, #c9a84c)"/>
+              <circle cx="440" cy="37" r="1.5" stroke="#999" stroke-width="0.8" fill="none"/>
+
+              <!-- Butt cap -->
+              <rect x="2" y="30" width="8" height="16" rx="3" fill="#444"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="builder-actions">
+        <button class="btn btn-primary btn-lg" id="to-quote-btn">Continue to Quote &rarr;</button>
+        <div class="builder-secondary">
+          <button class="save-build-btn" id="save-build-btn">📋 Copy Build Link</button>
+          <a class="skip-link" id="skip-to-quote">Skip to Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 7: Quote Form -->
+  <section class="step" data-step="7">
+    <div class="step-inner">
+      <div class="quote-summary" id="quote-summary"></div>
+      <h2>Almost There — Let's Get Your Quote</h2>
+      <p>&nbsp;</p>
+      <div class="quote-form-wrap">
+        <form id="quote-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first-name">First Name *</label>
+              <input type="text" id="first-name" name="firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last Name *</label>
+              <input type="text" id="last-name" name="lastName" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+          <div id="bulk-fields">
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <input type="number" id="quantity" name="quantity" min="1">
+            </div>
+            <div class="form-group">
+              <label for="team-name">Team / Business Name</label>
+              <input type="text" id="team-name" name="teamName">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="notes">Additional Notes</label>
+            <textarea id="notes" name="notes" placeholder="Tell us about your fishing style, preferred techniques, or any special requests..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Request My Custom Quote</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 8: Thank You -->
+  <section class="step" data-step="8">
+    <div class="step-inner">
+      <div class="thankyou-wrap">
+        <div class="thankyou-check"></div>
+        <h2>We've Got Your Build Details!</h2>
+        <p>Our team will review your custom rod configuration and get back to you within 24-48 hours with a detailed quote.</p>
+        <p>Keep an eye on your inbox — we'll include rod specs, timeline, and pricing.</p>
+        <a href="index-a.html" class="btn btn-primary">Browse Our Gallery &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof Toast -->
+  <div class="social-proof-toast" id="social-proof-toast">
+    <div class="toast-avatar"></div>
+    <div class="toast-content">
+      <strong class="toast-name"></strong>
+      <span class="toast-action"></span>
+      <span class="toast-time"></span>
+    </div>
+  </div>
+
+  <script src="js/landing.js"></script>
+</body>
+</html>

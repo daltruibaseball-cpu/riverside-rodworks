@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg: #1e1a14;
+  --bg-alt: #2c2416;
+  --bg-card: #352d22;
+  --text: #e8ddd0;
+  --text-muted: #a89880;
+  --accent: #c17f3e;
+  --accent-hover: #d4924f;
+  --font-heading: 'Oswald', 'Impact', sans-serif;
+  --font-body: 'Source Sans 3', sans-serif;
+}
+
+/* Noise/grain texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: repeating-radial-gradient(
+    circle at 17% 32%, rgba(255,255,255,0.12) 0px, transparent 1px
+  ), repeating-radial-gradient(
+    circle at 62% 78%, rgba(255,255,255,0.08) 0px, transparent 1px
+  ), repeating-radial-gradient(
+    circle at 89% 14%, rgba(255,255,255,0.1) 0px, transparent 1px
+  );
+  background-size: 3px 3px, 4px 4px, 5px 5px;
+}
+
+/* Cards */
+.card,
+.service-card,
+.testimonial-card,
+.gallery-item {
+  border: 1px solid rgba(193, 127, 62, 0.2);
+}
+
+/* Hero overlay */
+.hero::before,
+.hero-overlay {
+  background: linear-gradient(135deg, rgba(30,26,20,0.8) 0%, rgba(44,36,22,0.4) 100%);
+}
+
+/* Brand bar */
+.brand-bar {
+  border-width: 2px;
+  border-color: var(--accent);
+}
+
+/* Process icons — rugged square feel */
+.process-icon,
+.step-icon {
+  border-radius: 4px;
+}
+
+/* Buttons — angular */
+.btn,
+button,
+.cta-btn {
+  border-radius: 4px;
+}
+
+/* Section header accent line */
+.section-header::after,
+.section-title::after {
+  height: 4px;
+  width: 80px;
+}
