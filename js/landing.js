@@ -265,14 +265,14 @@
 
   function buildTechniqueCards() {
     var techniques = techniquesByFishingType[quizData.fishingType] || techniquesByFishingType['other'];
-    var container = document.querySelector('#step-technique .quiz-grid');
+    var container = document.getElementById('technique-grid');
     if (!container) return;
 
     var html = '';
     techniques.forEach(function (t) {
       html += '<div class="quiz-card" data-field="technique" data-value="' + t.value + '">';
-      html += '<span class="quiz-icon">' + t.icon + '</span>';
-      html += '<span class="quiz-label">' + t.label + '</span>';
+      html += '<span class="card-icon">' + t.icon + '</span>';
+      html += '<span class="card-label">' + t.label + '</span>';
       html += '</div>';
     });
     container.innerHTML = html;
