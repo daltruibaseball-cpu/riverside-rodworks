@@ -84,8 +84,39 @@
     </div>
   </section>
 
-  <!-- STEP 2: Order Type -->
+  <!-- STEP 2: Spinning or Casting -->
   <section class="step" data-step="2">
+    <div class="step-inner">
+      <h2>Spinning or casting?</h2>
+      <p>This determines your reel seat, guide layout, and handle orientation.</p>
+      <div class="quiz-grid cols-2-wide">
+        <div class="quiz-card quiz-card--lg" data-field="rodStyle" data-value="spinning">
+          <span class="card-icon">🔄</span>
+          <span class="card-label">Spinning</span>
+          <span class="card-desc">Reel hangs below the rod. Open-face reel. Great for finesse and lighter presentations.</span>
+        </div>
+        <div class="quiz-card quiz-card--lg" data-field="rodStyle" data-value="casting">
+          <span class="card-icon">🎯</span>
+          <span class="card-label">Casting / Baitcaster</span>
+          <span class="card-desc">Reel sits on top. More control and power. Preferred for heavier techniques.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3: Technique (dynamically populated by JS) -->
+  <section class="step" data-step="3">
+    <div class="step-inner">
+      <h2>What's your primary technique?</h2>
+      <p>This helps us dial in the right power, action, and blank material.</p>
+      <div class="quiz-grid" id="technique-grid">
+        <!-- JS populates cards based on fishingType -->
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 4: Order Type -->
+  <section class="step" data-step="4">
     <div class="step-inner">
       <h2>Is this for yourself or a larger order?</h2>
       <p>&nbsp;</p>
@@ -109,8 +140,8 @@
     </div>
   </section>
 
-  <!-- STEP 3: Priorities (multi-select) -->
-  <section class="step" data-step="3">
+  <!-- STEP 5: Priorities (multi-select) -->
+  <section class="step" data-step="5">
     <div class="step-inner">
       <h2>What matters most to you?</h2>
       <p>Pick up to 2</p>
@@ -140,8 +171,8 @@
     </div>
   </section>
 
-  <!-- STEP 4: Experience Level -->
-  <section class="step" data-step="4">
+  <!-- STEP 6: Experience Level -->
+  <section class="step" data-step="6">
     <div class="step-inner">
       <h2>How would you describe yourself?</h2>
       <p>&nbsp;</p>
@@ -166,8 +197,8 @@
     </div>
   </section>
 
-  <!-- STEP 5: Budget -->
-  <section class="step" data-step="5">
+  <!-- STEP 7: Budget -->
+  <section class="step" data-step="7">
     <div class="step-inner">
       <h2>What's your budget range per rod?</h2>
       <p>&nbsp;</p>
@@ -192,8 +223,8 @@
     </div>
   </section>
 
-  <!-- STEP 6: Builder -->
-  <section class="step" data-step="6">
+  <!-- STEP 8: Builder -->
+  <section class="step" data-step="8">
     <div class="step-inner">
       <div class="quiz-summary" id="quiz-summary"></div>
 
@@ -205,320 +236,197 @@
       </div>
 
       <h2 id="builder-heading">Let's Design Your Rod</h2>
-      <p>&nbsp;</p>
-      <div class="builder-layout">
-        <!-- Left: Panels -->
-        <div class="builder-panels">
+      <p id="builder-specs" class="builder-specs-line"></p>
 
-          <!-- Handle Style -->
-          <div class="builder-panel">
-            <h3>Handle Style</h3>
-            <div class="panel-options">
-              <div class="option-card selected" data-handle="cork">
-                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="4" width="36" height="16" rx="3" fill="#d4a574"/>
-                  <line x1="8" y1="6" x2="8" y2="20" stroke="#c4935a" stroke-width="0.5"/>
-                  <line x1="14" y1="6" x2="14" y2="20" stroke="#c4935a" stroke-width="0.5"/>
-                  <line x1="20" y1="6" x2="20" y2="20" stroke="#c4935a" stroke-width="0.5"/>
-                  <line x1="26" y1="6" x2="26" y2="20" stroke="#c4935a" stroke-width="0.5"/>
-                  <line x1="32" y1="6" x2="32" y2="20" stroke="#c4935a" stroke-width="0.5"/>
-                </svg>
-                <span>Full Cork</span>
-              </div>
-              <div class="option-card" data-handle="split-grip">
-                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="4" width="14" height="16" rx="3" fill="#d4a574"/>
-                  <rect x="24" y="4" width="14" height="16" rx="3" fill="#d4a574"/>
-                  <rect x="16" y="8" width="8" height="8" rx="1" fill="#555" opacity="0.4"/>
-                </svg>
-                <span>Split Grip</span>
-              </div>
-              <div class="option-card" data-handle="eva">
-                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="4" width="36" height="16" rx="3" fill="#333"/>
-                  <rect x="2" y="4" width="36" height="16" rx="3" fill="url(#eva-texture)" opacity="0.3"/>
-                  <defs><pattern id="eva-texture" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.5" fill="#555"/></pattern></defs>
-                </svg>
-                <span>EVA Foam</span>
-              </div>
-              <div class="option-card" data-handle="hybrid">
-                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="4" width="18" height="16" rx="3" fill="#d4a574"/>
-                  <rect x="20" y="4" width="18" height="16" rx="0 3 3 0" fill="#333"/>
-                  <line x1="8" y1="6" x2="8" y2="20" stroke="#c4935a" stroke-width="0.5"/>
-                  <line x1="14" y1="6" x2="14" y2="20" stroke="#c4935a" stroke-width="0.5"/>
-                </svg>
-                <span>Hybrid</span>
-              </div>
-            </div>
-          </div>
+      <div class="builder-panels-single">
 
-          <!-- Reel Seat -->
-          <div class="builder-panel">
-            <h3>Reel Seat</h3>
-            <div class="panel-options cols-3">
-              <div class="option-card selected" data-reelseat="fuji">
-                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="6" y="3" width="28" height="18" rx="2" fill="#555"/>
-                  <rect x="8" y="6" width="24" height="4" rx="1" fill="#777"/>
-                  <rect x="8" y="14" width="24" height="4" rx="1" fill="#777"/>
-                  <circle cx="20" cy="12" r="2" fill="#999"/>
-                </svg>
-                <span>Fuji DPS</span>
-              </div>
-              <div class="option-card" data-reelseat="fuji-skeleton">
-                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="6" y="5" width="28" height="3" rx="1" fill="#555"/>
-                  <rect x="6" y="16" width="28" height="3" rx="1" fill="#555"/>
-                  <rect x="8" y="5" width="4" height="14" rx="1" fill="#444"/>
-                  <rect x="28" y="5" width="4" height="14" rx="1" fill="#444"/>
-                  <circle cx="20" cy="12" r="2" fill="#666" stroke="#888" stroke-width="0.5"/>
-                </svg>
-                <span>Fuji Skeleton</span>
-              </div>
-              <div class="option-card" data-reelseat="custom-engraved">
-                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="6" y="3" width="28" height="18" rx="2" fill="#666"/>
-                  <rect x="10" y="7" width="20" height="10" rx="1" fill="none" stroke="#999" stroke-width="0.5" stroke-dasharray="2 1"/>
-                  <text x="20" y="14" text-anchor="middle" fill="#bbb" font-size="5" font-family="serif" font-style="italic">RRW</text>
-                </svg>
-                <span>Custom Engraved</span>
-              </div>
+        <!-- Blank Material (auto-suggested) -->
+        <div class="builder-panel">
+          <h3>Blank Material <span class="auto-badge" id="blank-auto-badge">Auto-selected based on technique</span></h3>
+          <div class="panel-options cols-3">
+            <div class="option-card photo-card selected" data-blank="graphite">
+              <div class="option-photo"><img src="assets/images/blank-graphite.svg" alt="Graphite blank" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Graphite</span>
+              <span class="option-desc">Lightweight, sensitive, fast recovery</span>
             </div>
-          </div>
-
-          <!-- Thread Wraps -->
-          <div class="builder-panel">
-            <h3>Thread Wraps</h3>
-            <div class="pattern-selector">
-              <div class="pattern-option selected" data-pattern="single">
-                <svg class="pattern-preview" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="4" y="4" width="40" height="16" rx="2" fill="#1a1a2e"/>
-                  <line x1="8" y1="8" x2="40" y2="8" stroke="#2a2a4e" stroke-width="1"/>
-                  <line x1="8" y1="12" x2="40" y2="12" stroke="#2a2a4e" stroke-width="1"/>
-                  <line x1="8" y1="16" x2="40" y2="16" stroke="#2a2a4e" stroke-width="1"/>
-                </svg>
-                <span>Single Color</span>
-              </div>
-              <div class="pattern-option" data-pattern="tiger">
-                <svg class="pattern-preview" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="4" y="4" width="40" height="16" rx="2" fill="#1a1a2e"/>
-                  <line x1="10" y1="4" x2="14" y2="20" stroke="#c9a84c" stroke-width="2"/>
-                  <line x1="18" y1="4" x2="22" y2="20" stroke="#c9a84c" stroke-width="2"/>
-                  <line x1="26" y1="4" x2="30" y2="20" stroke="#c9a84c" stroke-width="2"/>
-                  <line x1="34" y1="4" x2="38" y2="20" stroke="#c9a84c" stroke-width="2"/>
-                </svg>
-                <span>Tiger Wrap</span>
-              </div>
-              <div class="pattern-option" data-pattern="diamond">
-                <svg class="pattern-preview" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="4" y="4" width="40" height="16" rx="2" fill="#1a1a2e"/>
-                  <path d="M12 4L20 12L12 20M20 4L28 12L20 20M28 4L36 12L28 20" stroke="#c9a84c" stroke-width="1" fill="none"/>
-                  <path d="M12 20L20 12L12 4M20 20L28 12L20 4M28 20L36 12L28 4" stroke="#c9a84c" stroke-width="1" fill="none" opacity="0.5"/>
-                </svg>
-                <span>Diamond</span>
-              </div>
-              <div class="pattern-option" data-pattern="spiral">
-                <svg class="pattern-preview" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="4" y="4" width="40" height="16" rx="2" fill="#1a1a2e"/>
-                  <path d="M8 20C12 4 16 20 20 4C24 20 28 4 32 20C36 4 40 20 44 4" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
-                </svg>
-                <span>Spiral</span>
-              </div>
+            <div class="option-card photo-card" data-blank="fiberglass">
+              <div class="option-photo"><img src="assets/images/blank-fiberglass.svg" alt="Fiberglass blank" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Fiberglass</span>
+              <span class="option-desc">Durable, forgiving, smooth action</span>
             </div>
-            <div class="color-swatches">
-              <div class="swatch-wrap">
-                <div class="color-swatch selected" data-color="#1a1a2e" style="background:#1a1a2e;"></div>
-                <span class="swatch-label">Midnight</span>
-              </div>
-              <div class="swatch-wrap">
-                <div class="color-swatch" data-color="#8b0000" style="background:#8b0000;"></div>
-                <span class="swatch-label">Crimson</span>
-              </div>
-              <div class="swatch-wrap">
-                <div class="color-swatch" data-color="#1b4332" style="background:#1b4332;"></div>
-                <span class="swatch-label">Forest</span>
-              </div>
-              <div class="swatch-wrap">
-                <div class="color-swatch" data-color="#1a3a6c" style="background:#1a3a6c;"></div>
-                <span class="swatch-label">Royal Blue</span>
-              </div>
-              <div class="swatch-wrap">
-                <div class="color-swatch" data-color="#b87333" style="background:#b87333;"></div>
-                <span class="swatch-label">Copper</span>
-              </div>
-              <div class="swatch-wrap">
-                <div class="color-swatch" data-color="#f5f5f0" style="background:#f5f5f0;"></div>
-                <span class="swatch-label">Pearl White</span>
-              </div>
-              <div class="swatch-wrap">
-                <div class="color-swatch" data-color="#722f37" style="background:#722f37;"></div>
-                <span class="swatch-label">Burgundy</span>
-              </div>
-              <div class="swatch-wrap">
-                <div class="color-swatch custom" data-color="custom"></div>
-                <span class="swatch-label">Custom</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Rod Length -->
-          <div class="builder-panel">
-            <h3>Rod Length</h3>
-            <div class="length-segments">
-              <div class="length-seg" data-length="6-0-to-6-6">6'0"–6'6"</div>
-              <div class="length-seg selected" data-length="6-6-to-7-0">6'6"–7'0"</div>
-              <div class="length-seg" data-length="7-0-to-7-6">7'0"–7'6"</div>
-              <div class="length-seg" data-length="7-6-plus">7'6"+</div>
-            </div>
-          </div>
-
-          <!-- Guide Type -->
-          <div class="builder-panel">
-            <h3>Guide Type</h3>
-            <div class="panel-options cols-3">
-              <div class="option-card selected" data-guidetype="standard">
-                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="20" cy="8" r="5" stroke="#999" stroke-width="1.5" fill="none"/>
-                  <line x1="20" y1="13" x2="20" y2="22" stroke="#999" stroke-width="1.5"/>
-                  <line x1="16" y1="22" x2="24" y2="22" stroke="#999" stroke-width="1"/>
-                </svg>
-                <span>Standard</span>
-              </div>
-              <div class="option-card" data-guidetype="micro">
-                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="20" cy="10" r="3" stroke="#999" stroke-width="1.5" fill="none"/>
-                  <line x1="20" y1="13" x2="20" y2="20" stroke="#999" stroke-width="1"/>
-                  <line x1="17" y1="20" x2="23" y2="20" stroke="#999" stroke-width="0.75"/>
-                </svg>
-                <span>Micro Guides</span>
-              </div>
-              <div class="option-card" data-guidetype="heavy-duty">
-                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="20" cy="6" r="7" stroke="#999" stroke-width="2" fill="none"/>
-                  <line x1="20" y1="13" x2="20" y2="22" stroke="#999" stroke-width="2"/>
-                  <line x1="14" y1="22" x2="26" y2="22" stroke="#999" stroke-width="1.5"/>
-                </svg>
-                <span>Heavy Duty</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Grip Material -->
-          <div class="builder-panel">
-            <h3>Grip Material</h3>
-            <div class="panel-options cols-3">
-              <div class="option-card selected" data-grip="cork">
-                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="4" y="4" width="32" height="16" rx="4" fill="#c4935a"/>
-                  <circle cx="12" cy="10" r="1" fill="#b8834a" opacity="0.6"/>
-                  <circle cx="20" cy="14" r="1.5" fill="#b8834a" opacity="0.6"/>
-                  <circle cx="28" cy="9" r="1" fill="#b8834a" opacity="0.6"/>
-                  <circle cx="16" cy="16" r="0.8" fill="#b8834a" opacity="0.5"/>
-                  <circle cx="24" cy="8" r="0.8" fill="#b8834a" opacity="0.5"/>
-                </svg>
-                <span>Premium Cork</span>
-              </div>
-              <div class="option-card" data-grip="hypalon">
-                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="4" y="4" width="32" height="16" rx="4" fill="#2a2a2a"/>
-                  <line x1="8" y1="8" x2="12" y2="16" stroke="#3a3a3a" stroke-width="0.5"/>
-                  <line x1="14" y1="8" x2="18" y2="16" stroke="#3a3a3a" stroke-width="0.5"/>
-                  <line x1="20" y1="8" x2="24" y2="16" stroke="#3a3a3a" stroke-width="0.5"/>
-                  <line x1="26" y1="8" x2="30" y2="16" stroke="#3a3a3a" stroke-width="0.5"/>
-                  <line x1="32" y1="8" x2="36" y2="16" stroke="#3a3a3a" stroke-width="0.5"/>
-                </svg>
-                <span>Hypalon</span>
-              </div>
-              <div class="option-card" data-grip="eva">
-                <svg class="option-icon" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="4" y="4" width="32" height="16" rx="4" fill="#3a3a3a"/>
-                  <rect x="4" y="4" width="32" height="16" rx="4" fill="url(#grip-eva-tex)" opacity="0.3"/>
-                  <defs><pattern id="grip-eva-tex" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="0.4" fill="#555"/></pattern></defs>
-                </svg>
-                <span>EVA</span>
-              </div>
+            <div class="option-card photo-card" data-blank="composite">
+              <div class="option-photo"><img src="assets/images/blank-composite.svg" alt="Composite blank" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Composite</span>
+              <span class="option-desc">Best of both — versatile</span>
             </div>
           </div>
         </div>
 
-        <!-- Right: Rod Preview (SVG) -->
-        <div class="rod-preview-col">
-          <div class="rod-preview" id="rod-preview">
-            <svg class="rod-assembly-svg" viewBox="0 0 450 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Shadow -->
-              <ellipse cx="225" cy="72" rx="180" ry="4" fill="rgba(0,0,0,0.15)"/>
-
-              <!-- Grip -->
-              <rect class="svg-grip" x="8" y="28" width="48" height="20" rx="5" fill="#c4935a"/>
-              <!-- Cork texture dots -->
-              <circle cx="18" cy="35" r="1" fill="#b8834a" opacity="0.4"/>
-              <circle cx="28" cy="40" r="1.2" fill="#b8834a" opacity="0.4"/>
-              <circle cx="38" cy="34" r="0.8" fill="#b8834a" opacity="0.4"/>
-              <circle cx="45" cy="42" r="1" fill="#b8834a" opacity="0.4"/>
-
-              <!-- Handle -->
-              <rect class="svg-handle" x="56" y="30" width="60" height="16" rx="3" fill="#d4a574"/>
-              <!-- Handle texture lines -->
-              <line x1="64" y1="32" x2="64" y2="44" stroke="#c4935a" stroke-width="0.4" opacity="0.5"/>
-              <line x1="72" y1="32" x2="72" y2="44" stroke="#c4935a" stroke-width="0.4" opacity="0.5"/>
-              <line x1="80" y1="32" x2="80" y2="44" stroke="#c4935a" stroke-width="0.4" opacity="0.5"/>
-              <line x1="88" y1="32" x2="88" y2="44" stroke="#c4935a" stroke-width="0.4" opacity="0.5"/>
-              <line x1="96" y1="32" x2="96" y2="44" stroke="#c4935a" stroke-width="0.4" opacity="0.5"/>
-              <line x1="104" y1="32" x2="104" y2="44" stroke="#c4935a" stroke-width="0.4" opacity="0.5"/>
-
-              <!-- Reel Seat -->
-              <rect class="svg-reelseat" x="116" y="31" width="32" height="14" rx="2" fill="#555"/>
-              <rect x="120" y="34" width="10" height="3" rx="1" fill="#777" opacity="0.6"/>
-              <rect x="120" y="39" width="10" height="3" rx="1" fill="#777" opacity="0.6"/>
-              <circle cx="138" cy="38" r="2" fill="#888" opacity="0.5"/>
-
-              <!-- Rod Blank (main shaft) -->
-              <path class="svg-blank" d="M148 38 L148 34 Q300 32 430 36 L430 38 Q300 40 148 38Z" fill="var(--accent, #c9a84c)"/>
-
-              <!-- Guide wraps (colored bands on blank) -->
-              <rect class="svg-wrap" x="180" y="33" width="8" height="8" rx="1" fill="#1a1a2e"/>
-              <rect class="svg-wrap" x="220" y="33.5" width="7" height="7" rx="1" fill="#1a1a2e"/>
-              <rect class="svg-wrap" x="260" y="34" width="6" height="6" rx="1" fill="#1a1a2e"/>
-              <rect class="svg-wrap" x="300" y="34.5" width="5" height="5" rx="1" fill="#1a1a2e"/>
-              <rect class="svg-wrap" x="345" y="35" width="4" height="4" rx="1" fill="#1a1a2e"/>
-              <rect class="svg-wrap" x="385" y="35.5" width="3" height="3" rx="0.5" fill="#1a1a2e"/>
-
-              <!-- Guides (rings on feet) -->
-              <g class="svg-guide" stroke="#1a1a2e" stroke-width="1.5" fill="none">
-                <circle cx="184" cy="25" r="6"/>
-                <line x1="184" y1="31" x2="184" y2="33"/>
-              </g>
-              <g class="svg-guide" stroke="#1a1a2e" stroke-width="1.5" fill="none">
-                <circle cx="223" cy="27" r="5"/>
-                <line x1="223" y1="32" x2="223" y2="33.5"/>
-              </g>
-              <g class="svg-guide" stroke="#1a1a2e" stroke-width="1.3" fill="none">
-                <circle cx="263" cy="28" r="4.5"/>
-                <line x1="263" y1="32.5" x2="263" y2="34"/>
-              </g>
-              <g class="svg-guide" stroke="#1a1a2e" stroke-width="1.2" fill="none">
-                <circle cx="302" cy="29" r="4"/>
-                <line x1="302" y1="33" x2="302" y2="34.5"/>
-              </g>
-              <g class="svg-guide" stroke="#1a1a2e" stroke-width="1" fill="none">
-                <circle cx="347" cy="30" r="3"/>
-                <line x1="347" y1="33" x2="347" y2="35"/>
-              </g>
-              <g class="svg-guide" stroke="#1a1a2e" stroke-width="0.8" fill="none">
-                <circle cx="387" cy="31.5" r="2.5"/>
-                <line x1="387" y1="34" x2="387" y2="35.5"/>
-              </g>
-
-              <!-- Rod Tip -->
-              <polygon class="svg-tip" points="430,35.5 440,37 430,38.5" fill="var(--accent, #c9a84c)"/>
-              <circle cx="440" cy="37" r="1.5" stroke="#999" stroke-width="0.8" fill="none"/>
-
-              <!-- Butt cap -->
-              <rect x="2" y="30" width="8" height="16" rx="3" fill="#444"/>
-            </svg>
+        <!-- Handle Style -->
+        <div class="builder-panel">
+          <h3>Handle Style</h3>
+          <div class="panel-options">
+            <div class="option-card photo-card selected" data-handle="cork">
+              <div class="option-photo"><img src="assets/images/handle-full-cork.svg" alt="Full cork handle" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Full Cork</span>
+            </div>
+            <div class="option-card photo-card" data-handle="split-grip">
+              <div class="option-photo"><img src="assets/images/handle-split-grip.svg" alt="Split grip handle" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Split Grip</span>
+            </div>
+            <div class="option-card photo-card" data-handle="eva">
+              <div class="option-photo"><img src="assets/images/handle-eva-foam.svg" alt="EVA foam handle" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>EVA Foam</span>
+            </div>
+            <div class="option-card photo-card" data-handle="hybrid">
+              <div class="option-photo"><img src="assets/images/handle-hybrid.svg" alt="Hybrid handle" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Hybrid</span>
+            </div>
           </div>
         </div>
+
+        <!-- Reel Seat (spinning options) -->
+        <div class="builder-panel reelseat-panel" id="reelseat-spinning">
+          <h3>Reel Seat <span class="style-badge">Spinning</span></h3>
+          <div class="panel-options cols-3">
+            <div class="option-card photo-card selected" data-reelseat="fuji-dps-spinning">
+              <div class="option-photo"><img src="assets/images/reelseat-fuji-spinning.svg" alt="Fuji DPS spinning reel seat" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Fuji DPS</span>
+            </div>
+            <div class="option-card photo-card" data-reelseat="fuji-skeleton">
+              <div class="option-photo"><img src="assets/images/reelseat-skeleton.svg" alt="Fuji skeleton reel seat" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Fuji Skeleton</span>
+            </div>
+            <div class="option-card photo-card" data-reelseat="custom-engraved">
+              <div class="option-photo"><img src="assets/images/reelseat-skeleton.svg" alt="Custom engraved reel seat" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Custom Engraved</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reel Seat (casting options) -->
+        <div class="builder-panel reelseat-panel" id="reelseat-casting" style="display:none;">
+          <h3>Reel Seat <span class="style-badge">Casting</span></h3>
+          <div class="panel-options cols-3">
+            <div class="option-card photo-card selected" data-reelseat="fuji-dps-casting">
+              <div class="option-photo"><img src="assets/images/reelseat-fuji-casting.svg" alt="Fuji DPS casting reel seat" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Fuji DPS</span>
+            </div>
+            <div class="option-card photo-card" data-reelseat="fuji-trigger">
+              <div class="option-photo"><img src="assets/images/reelseat-fuji-casting.svg" alt="Fuji trigger reel seat" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Fuji Trigger</span>
+            </div>
+            <div class="option-card photo-card" data-reelseat="custom-engraved-cast">
+              <div class="option-photo"><img src="assets/images/reelseat-skeleton.svg" alt="Custom engraved reel seat" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Custom Engraved</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thread Wraps -->
+        <div class="builder-panel">
+          <h3>Thread Wraps</h3>
+
+          <!-- Pattern -->
+          <label class="panel-sublabel">Pattern</label>
+          <div class="pattern-selector">
+            <div class="pattern-option selected" data-pattern="single">
+              <svg class="pattern-preview" viewBox="0 0 48 24" fill="none"><rect x="4" y="4" width="40" height="16" rx="2" fill="#1a1a2e"/><line x1="8" y1="8" x2="40" y2="8" stroke="#2a2a4e" stroke-width="1"/><line x1="8" y1="12" x2="40" y2="12" stroke="#2a2a4e" stroke-width="1"/><line x1="8" y1="16" x2="40" y2="16" stroke="#2a2a4e" stroke-width="1"/></svg>
+              <span>Single Color</span>
+            </div>
+            <div class="pattern-option" data-pattern="tiger">
+              <svg class="pattern-preview" viewBox="0 0 48 24" fill="none"><rect x="4" y="4" width="40" height="16" rx="2" fill="#1a1a2e"/><line x1="10" y1="4" x2="14" y2="20" stroke="#c9a84c" stroke-width="2"/><line x1="18" y1="4" x2="22" y2="20" stroke="#c9a84c" stroke-width="2"/><line x1="26" y1="4" x2="30" y2="20" stroke="#c9a84c" stroke-width="2"/><line x1="34" y1="4" x2="38" y2="20" stroke="#c9a84c" stroke-width="2"/></svg>
+              <span>Tiger Wrap</span>
+            </div>
+            <div class="pattern-option" data-pattern="diamond">
+              <svg class="pattern-preview" viewBox="0 0 48 24" fill="none"><rect x="4" y="4" width="40" height="16" rx="2" fill="#1a1a2e"/><path d="M12 4L20 12L12 20M20 4L28 12L20 20M28 4L36 12L28 20" stroke="#c9a84c" stroke-width="1" fill="none"/><path d="M12 20L20 12L12 4M20 20L28 12L20 4M28 20L36 12L28 4" stroke="#c9a84c" stroke-width="1" fill="none" opacity="0.5"/></svg>
+              <span>Diamond</span>
+            </div>
+            <div class="pattern-option" data-pattern="spiral">
+              <svg class="pattern-preview" viewBox="0 0 48 24" fill="none"><rect x="4" y="4" width="40" height="16" rx="2" fill="#1a1a2e"/><path d="M8 20C12 4 16 20 20 4C24 20 28 4 32 20C36 4 40 20 44 4" stroke="#c9a84c" stroke-width="1.5" fill="none"/></svg>
+              <span>Spiral</span>
+            </div>
+          </div>
+
+          <!-- Primary Wrap Color -->
+          <label class="panel-sublabel">Primary Color</label>
+          <div class="color-swatches">
+            <div class="swatch-wrap"><div class="color-swatch selected" data-color="#1a1a2e" style="background:#1a1a2e;"></div><span class="swatch-label">Midnight</span></div>
+            <div class="swatch-wrap"><div class="color-swatch" data-color="#8b0000" style="background:#8b0000;"></div><span class="swatch-label">Crimson</span></div>
+            <div class="swatch-wrap"><div class="color-swatch" data-color="#1b4332" style="background:#1b4332;"></div><span class="swatch-label">Forest</span></div>
+            <div class="swatch-wrap"><div class="color-swatch" data-color="#1a3a6c" style="background:#1a3a6c;"></div><span class="swatch-label">Royal Blue</span></div>
+            <div class="swatch-wrap"><div class="color-swatch" data-color="#b87333" style="background:#b87333;"></div><span class="swatch-label">Copper</span></div>
+            <div class="swatch-wrap"><div class="color-swatch" data-color="#f5f5f0" style="background:#f5f5f0;"></div><span class="swatch-label">Pearl White</span></div>
+            <div class="swatch-wrap"><div class="color-swatch" data-color="#722f37" style="background:#722f37;"></div><span class="swatch-label">Burgundy</span></div>
+            <div class="swatch-wrap"><div class="color-swatch custom" data-color="custom"></div><span class="swatch-label">Custom</span></div>
+          </div>
+
+          <!-- Trim / Accent Color -->
+          <label class="panel-sublabel">Trim / Accent Color</label>
+          <div class="color-swatches trim-swatches">
+            <div class="swatch-wrap"><div class="color-swatch trim-swatch selected" data-trim="#c9a84c" style="background:#c9a84c;"></div><span class="swatch-label">Gold</span></div>
+            <div class="swatch-wrap"><div class="color-swatch trim-swatch" data-trim="#c0c0c0" style="background:#c0c0c0;"></div><span class="swatch-label">Silver</span></div>
+            <div class="swatch-wrap"><div class="color-swatch trim-swatch" data-trim="#f5f5f0" style="background:#f5f5f0;"></div><span class="swatch-label">White</span></div>
+            <div class="swatch-wrap"><div class="color-swatch trim-swatch" data-trim="#1a1a1a" style="background:#1a1a1a;"></div><span class="swatch-label">Black</span></div>
+            <div class="swatch-wrap"><div class="color-swatch trim-swatch" data-trim="match" style="background:linear-gradient(135deg,#666,#999);"></div><span class="swatch-label">Match</span></div>
+            <div class="swatch-wrap"><div class="color-swatch trim-swatch" data-trim="none" style="background:transparent; border:2px dashed rgba(255,255,255,0.2);"></div><span class="swatch-label">None</span></div>
+          </div>
+        </div>
+
+        <!-- Rod Length (slider) -->
+        <div class="builder-panel">
+          <h3>Rod Length</h3>
+          <div class="length-slider-wrap">
+            <input type="range" id="length-slider" class="length-slider" min="0" max="10" step="1" value="5">
+            <div class="length-display" id="length-display">7'0"</div>
+            <div class="length-range-labels">
+              <span id="length-min-label">6'0"</span>
+              <span id="length-max-label">8'0"</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide Ring Material -->
+        <div class="builder-panel">
+          <h3>Guide Ring Material</h3>
+          <div class="panel-options cols-3">
+            <div class="option-card photo-card" data-guidering="alox">
+              <div class="option-photo"><img src="assets/images/guide-alox.svg" alt="Aluminum Oxide guide" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Aluminum Oxide</span>
+              <span class="option-desc">Reliable, budget-friendly</span>
+            </div>
+            <div class="option-card photo-card selected" data-guidering="sic">
+              <div class="option-photo"><img src="assets/images/guide-sic.svg" alt="Silicon Carbide guide" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>SiC</span>
+              <span class="option-desc">High heat dissipation, great for braid</span>
+            </div>
+            <div class="option-card photo-card" data-guidering="torzite">
+              <div class="option-photo"><img src="assets/images/guide-torzite.svg" alt="Torzite guide" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Torzite</span>
+              <span class="option-desc">Ultra-premium, lightest, best casting</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grip Material -->
+        <div class="builder-panel">
+          <h3>Grip Material</h3>
+          <div class="panel-options cols-3">
+            <div class="option-card photo-card selected" data-grip="cork">
+              <div class="option-photo"><img src="assets/images/grip-cork.svg" alt="Premium cork grip" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Premium Cork</span>
+            </div>
+            <div class="option-card photo-card" data-grip="hypalon">
+              <div class="option-photo"><img src="assets/images/grip-hypalon.svg" alt="Hypalon grip" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>Hypalon</span>
+            </div>
+            <div class="option-card photo-card" data-grip="eva">
+              <div class="option-photo"><img src="assets/images/grip-eva.svg" alt="EVA grip" onerror="this.parentElement.classList.add('no-img')"></div>
+              <span>EVA</span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="builder-actions">
@@ -531,8 +439,8 @@
     </div>
   </section>
 
-  <!-- STEP 7: Quote Form -->
-  <section class="step" data-step="7">
+  <!-- STEP 9: Quote Form -->
+  <section class="step" data-step="9">
     <div class="step-inner">
       <div class="quote-summary" id="quote-summary"></div>
       <h2>Almost There — Let's Get Your Quote</h2>
@@ -577,8 +485,8 @@
     </div>
   </section>
 
-  <!-- STEP 8: Thank You -->
-  <section class="step" data-step="8">
+  <!-- STEP 10: Thank You -->
+  <section class="step" data-step="10">
     <div class="step-inner">
       <div class="thankyou-wrap">
         <div class="thankyou-check"></div>

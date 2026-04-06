@@ -1,67 +1,160 @@
 (function () {
-  const quizData = {
+  var quizData = {
     fishingType: null,
+    rodStyle: null,
+    technique: null,
     orderType: null,
     priorities: [],
     experience: null,
     budget: null,
+    power: null,
+    action: null,
+    blankMaterial: 'graphite',
     handle: 'cork',
-    reelseat: 'fuji',
+    reelseat: 'fuji-dps-spinning',
     wrapColor: '#1a1a2e',
+    trimColor: '#c9a84c',
     wrapPattern: 'single',
-    length: '6-6-to-7-0',
-    guideType: 'standard',
+    length: 7.0,
+    guideRing: 'sic',
     grip: 'cork'
   };
 
-  let currentStep = 0;
+  var currentStep = 0;
 
-  const steps = document.querySelectorAll('.step');
-  const backBtn = document.getElementById('back-btn');
-  const progressLabels = document.querySelectorAll('.progress-label');
-  const progressSegments = document.querySelectorAll('.progress-segment');
+  var steps = document.querySelectorAll('.step');
+  var backBtn = document.getElementById('back-btn');
+  var progressLabels = document.querySelectorAll('.progress-label');
+  var progressSegments = document.querySelectorAll('.progress-segment');
+
+  // --- Technique Routing ---
+
+  var techniquesByFishingType = {
+    'freshwater-bass': [
+      { value: 'finesse', label: 'Finesse / Drop Shot', icon: '🎯', power: 'ML', action: 'XF', blankSuggest: 'graphite' },
+      { value: 'jigs', label: 'Jigs & Texas Rig', icon: '🪝', power: 'MH', action: 'F', blankSuggest: 'graphite' },
+      { value: 'crankbaits', label: 'Crankbaits & Treble Hooks', icon: '🐟', power: 'M', action: 'Mod', blankSuggest: 'composite' },
+      { value: 'topwater', label: 'Topwater', icon: '💥', power: 'M', action: 'F', blankSuggest: 'graphite' },
+      { value: 'frogging', label: 'Frogging / Punching', icon: '🐸', power: 'H', action: 'XF', blankSuggest: 'graphite' },
+      { value: 'swimbaits', label: 'Swimbaits', icon: '🏊', power: 'MH', action: 'Mod-F', blankSuggest: 'composite' },
+      { value: 'general', label: 'General Purpose', icon: '🎣', power: 'M', action: 'F', blankSuggest: 'graphite' }
+    ],
+    'inshore-saltwater': [
+      { value: 'flats', label: 'Light Inshore / Flats', icon: '🏖️', power: 'ML', action: 'F', blankSuggest: 'graphite' },
+      { value: 'redfish', label: 'Redfish / Speckled Trout', icon: '🐟', power: 'M', action: 'F', blankSuggest: 'graphite' },
+      { value: 'livebait-inshore', label: 'Live Bait / Bottom', icon: '🪱', power: 'MH', action: 'F', blankSuggest: 'composite' },
+      { value: 'topwater-salt', label: 'Topwater / Plugs', icon: '💥', power: 'M', action: 'F', blankSuggest: 'graphite' },
+      { value: 'heavy-structure', label: 'Heavy Structure', icon: '🪨', power: 'H', action: 'F', blankSuggest: 'composite' }
+    ],
+    'offshore': [
+      { value: 'trolling', label: 'Trolling', icon: '🚤', power: 'H', action: 'Mod', blankSuggest: 'fiberglass' },
+      { value: 'jigging-offshore', label: 'Jigging / Bottom Fishing', icon: '⬇️', power: 'H', action: 'F', blankSuggest: 'composite' },
+      { value: 'livebait-offshore', label: 'Live Bait / Chunking', icon: '🪱', power: 'MH', action: 'Mod-F', blankSuggest: 'composite' },
+      { value: 'standup', label: 'Stand-Up Big Game', icon: '💪', power: 'XH', action: 'Mod', blankSuggest: 'fiberglass' },
+      { value: 'popping', label: 'Popping / Plugging', icon: '🎯', power: 'H', action: 'XF', blankSuggest: 'graphite' }
+    ],
+    'fly-fishing': [
+      { value: 'dryfly', label: 'Dry Fly / Small Stream', icon: '🪶', power: 'UL-L', action: 'Mod-F', blankSuggest: 'graphite' },
+      { value: 'nymphing', label: 'Nymphing', icon: '🐛', power: 'M', action: 'Mod', blankSuggest: 'graphite' },
+      { value: 'streamer', label: 'Streamer', icon: '🐟', power: 'MH', action: 'F', blankSuggest: 'graphite' },
+      { value: 'saltfly', label: 'Saltwater Fly', icon: '🌊', power: 'MH-H', action: 'F', blankSuggest: 'graphite' }
+    ],
+    'ice-fishing': [
+      { value: 'panfish-ice', label: 'Panfish / Perch', icon: '🐟', power: 'UL', action: 'F', blankSuggest: 'graphite' },
+      { value: 'walleye-ice', label: 'Walleye', icon: '🎣', power: 'M', action: 'F', blankSuggest: 'graphite' },
+      { value: 'pike-ice', label: 'Pike / Lake Trout', icon: '🦈', power: 'MH', action: 'F', blankSuggest: 'composite' }
+    ],
+    'other': [
+      { value: 'general', label: 'General Purpose', icon: '🎣', power: 'M', action: 'F', blankSuggest: 'graphite' },
+      { value: 'custom-spec', label: 'I Have Specific Specs', icon: '📋', power: null, action: null, blankSuggest: null }
+    ]
+  };
+
+  // --- Length Config by Fishing Type ---
+
+  var lengthsByFishingType = {
+    'freshwater-bass': { min: 6.0, max: 8.0, default: 7.0, step: 2 },
+    'inshore-saltwater': { min: 6.5, max: 8.0, default: 7.0, step: 2 },
+    'offshore': { min: 5.5, max: 7.5, default: 6.5, step: 2 },
+    'fly-fishing': { min: 7.0, max: 10.0, default: 9.0, step: 6 },
+    'ice-fishing': { min: 2.0, max: 4.0, default: 2.5, step: 2 },
+    'other': { min: 5.0, max: 10.0, default: 7.0, step: 2 }
+  };
+
+  function formatLength(decimalFeet) {
+    var feet = Math.floor(decimalFeet);
+    var inches = Math.round((decimalFeet - feet) * 12);
+    if (inches === 12) { feet++; inches = 0; }
+    return feet + "'" + inches + '"';
+  }
+
+  function getLengthValues(fishingType) {
+    var config = lengthsByFishingType[fishingType] || lengthsByFishingType['other'];
+    var values = [];
+    var stepFeet = config.step / 12;
+    for (var v = config.min; v <= config.max + 0.001; v += stepFeet) {
+      values.push(Math.round(v * 100) / 100);
+    }
+    return values;
+  }
 
   // --- Color/Option Maps ---
 
-  const handleColorMap = {
+  var handleColorMap = {
     'cork': '#d4a574',
     'split-grip': '#d4a574',
     'eva': '#333333',
     'hybrid': '#8b7355'
   };
 
-  const gripColorMap = {
+  var gripColorMap = {
     'cork': '#c4935a',
     'hypalon': '#2a2a2a',
     'eva': '#3a3a3a'
   };
 
-  const reelseatColorMap = {
-    'fuji': '#555555',
+  var reelseatColorMap = {
+    'fuji-dps-spinning': '#555555',
+    'fuji-dps-casting': '#555555',
     'fuji-skeleton': '#444444',
+    'fuji-trigger': '#4a4a4a',
     'custom-engraved': '#666666'
   };
 
-  const lengthWidthMap = {
-    '6-0-to-6-6': 280,
-    '6-6-to-7-0': 320,
-    '7-0-to-7-6': 360,
-    '7-6-plus': 400
-  };
-
-  const guideSizeMap = {
-    'standard': 1,
-    'micro': 0.65,
-    'heavy-duty': 1.4
-  };
-
-  const labelMap = {
+  var labelMap = {
     'freshwater-bass': 'Freshwater Bass',
     'inshore-saltwater': 'Inshore Saltwater',
     'offshore': 'Offshore',
     'fly-fishing': 'Fly Fishing',
     'ice-fishing': 'Ice Fishing',
     'other': 'Other / Custom',
+    'spinning': 'Spinning',
+    'casting': 'Casting/Baitcaster',
+    'finesse': 'Finesse / Drop Shot',
+    'jigs': 'Jigs & Texas Rig',
+    'crankbaits': 'Crankbaits & Treble Hooks',
+    'topwater': 'Topwater',
+    'frogging': 'Frogging / Punching',
+    'swimbaits': 'Swimbaits',
+    'general': 'General Purpose',
+    'flats': 'Light Inshore / Flats',
+    'redfish': 'Redfish / Speckled Trout',
+    'livebait-inshore': 'Live Bait / Bottom',
+    'topwater-salt': 'Topwater / Plugs',
+    'heavy-structure': 'Heavy Structure',
+    'trolling': 'Trolling',
+    'jigging-offshore': 'Jigging / Bottom Fishing',
+    'livebait-offshore': 'Live Bait / Chunking',
+    'standup': 'Stand-Up Big Game',
+    'popping': 'Popping / Plugging',
+    'dryfly': 'Dry Fly / Small Stream',
+    'nymphing': 'Nymphing',
+    'streamer': 'Streamer',
+    'saltfly': 'Saltwater Fly',
+    'panfish-ice': 'Panfish / Perch',
+    'walleye-ice': 'Walleye',
+    'pike-ice': 'Pike / Lake Trout',
+    'custom-spec': 'I Have Specific Specs',
     'individual': 'Individual Rod',
     'small-batch': 'Small Batch',
     'bulk': 'Bulk / Team Order',
@@ -74,33 +167,40 @@
     'serious': 'Serious Angler',
     'tournament': 'Tournament Competitor',
     'guide': 'Guide / Captain',
-    '200-400': '$200–$400',
-    '400-600': '$400–$600',
-    '600-800': '$600–$800',
+    '200-400': '$200\u2013$400',
+    '400-600': '$400\u2013$600',
+    '600-800': '$600\u2013$800',
     '800-plus': '$800+',
     'unsure': 'Budget TBD',
+    'graphite': 'Graphite',
+    'fiberglass': 'Fiberglass',
+    'composite': 'Composite',
     'cork': 'Cork',
     'split-grip': 'Split Grip',
     'eva': 'EVA Foam',
     'hybrid': 'Hybrid',
     'hypalon': 'Hypalon',
-    'fuji': 'Fuji DPS',
+    'fuji-dps-spinning': 'Fuji DPS (Spinning)',
+    'fuji-dps-casting': 'Fuji DPS (Casting)',
     'fuji-skeleton': 'Fuji Skeleton',
+    'fuji-trigger': 'Fuji Trigger',
     'custom-engraved': 'Custom Engraved',
     'single': 'Single Wrap',
     'tiger': 'Tiger Wrap',
     'diamond': 'Diamond Wrap',
     'spiral': 'Spiral Wrap',
-    'standard': 'Standard Guides',
-    'micro': 'Micro Guides',
-    'heavy-duty': 'Heavy Duty Guides',
-    '6-0-to-6-6': "6'0\"–6'6\"",
-    '6-6-to-7-0': "6'6\"–7'0\"",
-    '7-0-to-7-6': "7'0\"–7'6\"",
-    '7-6-plus': "7'6\"+"
+    'alox': 'Aluminum Oxide',
+    'sic': 'Silicon Carbide (SiC)',
+    'torzite': 'Torzite',
+    'gold': 'Gold',
+    'silver': 'Silver',
+    'white': 'White',
+    'black': 'Black',
+    'match': 'Match Primary',
+    'none': 'None'
   };
 
-  const colorNameMap = {
+  var colorNameMap = {
     '#1a1a2e': 'Midnight',
     '#8b0000': 'Crimson',
     '#1b4332': 'Forest',
@@ -111,9 +211,18 @@
     'custom': 'Custom'
   };
 
+  var trimColorNameMap = {
+    '#c9a84c': 'Gold',
+    '#c0c0c0': 'Silver',
+    '#f5f5f0': 'White',
+    '#1a1a1a': 'Black',
+    'match': 'Match Primary',
+    'none': 'None'
+  };
+
   // --- Price Estimation ---
 
-  const basePrices = {
+  var basePrices = {
     'freshwater-bass': 300,
     'inshore-saltwater': 350,
     'offshore': 450,
@@ -122,24 +231,24 @@
     'other': 350
   };
 
-  const priceModifiers = {
+  var priceModifiers = {
+    blankMaterial: { 'graphite': 0, 'fiberglass': -30, 'composite': 20 },
     handle: { 'cork': 0, 'split-grip': 10, 'eva': -20, 'hybrid': 15 },
-    reelseat: { 'fuji': 0, 'fuji-skeleton': 25, 'custom-engraved': 60 },
+    reelseat: { 'fuji-dps-spinning': 0, 'fuji-dps-casting': 0, 'fuji-skeleton': 25, 'fuji-trigger': 10, 'custom-engraved': 60 },
     wrapPattern: { 'single': 0, 'tiger': 30, 'diamond': 45, 'spiral': 25 },
-    guideType: { 'standard': 0, 'micro': 35, 'heavy-duty': 20 },
-    grip: { 'cork': 0, 'hypalon': 10, 'eva': -10 },
-    length: { '6-0-to-6-6': -20, '6-6-to-7-0': 0, '7-0-to-7-6': 15, '7-6-plus': 30 }
+    guideRing: { 'alox': 0, 'sic': 40, 'torzite': 90 },
+    grip: { 'cork': 0, 'hypalon': 10, 'eva': -10 }
   };
 
   function calculatePrice() {
     var base = basePrices[quizData.fishingType] || 350;
     var total = base;
+    total += priceModifiers.blankMaterial[quizData.blankMaterial] || 0;
     total += priceModifiers.handle[quizData.handle] || 0;
     total += priceModifiers.reelseat[quizData.reelseat] || 0;
     total += priceModifiers.wrapPattern[quizData.wrapPattern] || 0;
-    total += priceModifiers.guideType[quizData.guideType] || 0;
+    total += priceModifiers.guideRing[quizData.guideRing] || 0;
     total += priceModifiers.grip[quizData.grip] || 0;
-    total += priceModifiers.length[quizData.length] || 0;
     return Math.round(total / 10) * 10;
   }
 
@@ -152,64 +261,62 @@
     setTimeout(function () { el.classList.remove('updating'); }, 300);
   }
 
-  // --- Smart Routing (fishing-type-specific builder options) ---
+  // --- Dynamic Technique Step ---
 
-  const fishingTypeConfig = {
-    'freshwater-bass': {
-      lengths: ['6-0-to-6-6', '6-6-to-7-0', '7-0-to-7-6', '7-6-plus'],
-      defaultLength: '6-6-to-7-0'
-    },
-    'inshore-saltwater': {
-      lengths: ['6-6-to-7-0', '7-0-to-7-6', '7-6-plus'],
-      defaultLength: '7-0-to-7-6'
-    },
-    'offshore': {
-      lengths: ['6-0-to-6-6', '6-6-to-7-0', '7-0-to-7-6'],
-      defaultLength: '6-6-to-7-0'
-    },
-    'fly-fishing': {
-      lengths: ['7-0-to-7-6', '7-6-plus'],
-      defaultLength: '7-6-plus'
-    },
-    'ice-fishing': {
-      lengths: ['6-0-to-6-6'],
-      defaultLength: '6-0-to-6-6'
-    },
-    'other': {
-      lengths: ['6-0-to-6-6', '6-6-to-7-0', '7-0-to-7-6', '7-6-plus'],
-      defaultLength: '6-6-to-7-0'
-    }
-  };
+  function buildTechniqueCards() {
+    var techniques = techniquesByFishingType[quizData.fishingType] || techniquesByFishingType['other'];
+    var container = document.querySelector('#step-technique .quiz-grid');
+    if (!container) return;
 
-  function applySmartRouting() {
-    var config = fishingTypeConfig[quizData.fishingType] || fishingTypeConfig['other'];
-
-    // Show/hide length segments based on fishing type
-    var lengthSegs = document.querySelectorAll('.length-seg');
-    lengthSegs.forEach(function (seg) {
-      var val = seg.getAttribute('data-length');
-      if (config.lengths.indexOf(val) > -1) {
-        seg.style.display = '';
-      } else {
-        seg.style.display = 'none';
-      }
+    var html = '';
+    techniques.forEach(function (t) {
+      html += '<div class="quiz-card" data-field="technique" data-value="' + t.value + '">';
+      html += '<span class="quiz-icon">' + t.icon + '</span>';
+      html += '<span class="quiz-label">' + t.label + '</span>';
+      html += '</div>';
     });
+    container.innerHTML = html;
 
-    // Set default length if current selection is hidden
-    if (config.lengths.indexOf(quizData.length) === -1) {
-      quizData.length = config.defaultLength;
-      lengthSegs.forEach(function (s) { s.classList.remove('selected'); });
-      var defaultSeg = document.querySelector('.length-seg[data-length="' + config.defaultLength + '"]');
-      if (defaultSeg) defaultSeg.classList.add('selected');
+    container.querySelectorAll('.quiz-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        handleTechniqueCard(card);
+      });
+    });
+  }
+
+  function handleTechniqueCard(card) {
+    var value = card.getAttribute('data-value');
+    quizData.technique = value;
+
+    var techniques = techniquesByFishingType[quizData.fishingType] || techniquesByFishingType['other'];
+    var match = null;
+    for (var i = 0; i < techniques.length; i++) {
+      if (techniques[i].value === value) { match = techniques[i]; break; }
     }
+
+    if (match) {
+      quizData.power = match.power;
+      quizData.action = match.action;
+      if (match.blankSuggest) {
+        quizData.blankMaterial = match.blankSuggest;
+      }
+    }
+
+    var siblings = card.parentElement.querySelectorAll('.quiz-card');
+    siblings.forEach(function (s) { s.classList.remove('selected'); });
+    card.classList.add('selected');
+
+    setTimeout(function () {
+      goToStep(currentStep + 1);
+    }, 300);
   }
 
   // --- Core Navigation ---
+  // Steps: 0=Hero, 1=FishingType, 2=SpinningOrCasting, 3=Technique, 4=OrderType, 5=Priorities, 6=Experience, 7=Budget, 8=Builder, 9=QuoteForm, 10=ThankYou
 
   function goToStep(n) {
     if (n < 0 || n >= steps.length) return;
 
-    // Exit animation on current step
     var currentEl = steps[currentStep];
     currentEl.classList.add('exiting');
 
@@ -226,8 +333,9 @@
       var heading = target.querySelector('h1, h2');
       if (heading) heading.focus();
 
-      if (n === 6) onEnterBuilder();
-      if (n === 7) onEnterQuote();
+      if (n === 3) buildTechniqueCards();
+      if (n === 8) onEnterBuilder();
+      if (n === 9) onEnterQuote();
     }, 250);
   }
 
@@ -244,11 +352,11 @@
   }
 
   function updateProgress() {
-    var quizDone = currentStep > 5;
-    var buildDone = currentStep > 6;
-    var inQuiz = currentStep >= 1 && currentStep <= 5;
-    var inBuild = currentStep === 6;
-    var inQuote = currentStep >= 7;
+    var quizDone = currentStep > 7;
+    var buildDone = currentStep > 8;
+    var inQuiz = currentStep >= 1 && currentStep <= 7;
+    var inBuild = currentStep === 8;
+    var inQuote = currentStep >= 9;
 
     progressLabels.forEach(function (l) { l.classList.remove('active', 'completed'); });
     progressSegments.forEach(function (s) { s.classList.remove('active', 'completed'); });
@@ -317,10 +425,90 @@
     buildChips('quiz-summary');
     var msg = getMessaging(quizData);
     document.getElementById('builder-heading').textContent = msg.heading;
-    applySmartRouting();
+    configureReelSeatOptions();
+    configureLengthSlider();
+    applyBlankMaterialFromTechnique();
     updateRodPreview();
     updatePriceDisplay();
     startSocialProof();
+  }
+
+  function applyBlankMaterialFromTechnique() {
+    var blankCards = document.querySelectorAll('[data-blankmaterial]');
+    blankCards.forEach(function (c) { c.classList.remove('selected'); });
+    var target = document.querySelector('[data-blankmaterial="' + quizData.blankMaterial + '"]');
+    if (target) target.classList.add('selected');
+  }
+
+  function configureReelSeatOptions() {
+    var allReelseats = document.querySelectorAll('[data-reelseat]');
+    allReelseats.forEach(function (card) {
+      var val = card.getAttribute('data-reelseat');
+      if (quizData.rodStyle === 'casting') {
+        if (val === 'fuji-dps-spinning' || val === 'fuji-skeleton') {
+          card.style.display = 'none';
+        } else {
+          card.style.display = '';
+        }
+      } else {
+        if (val === 'fuji-dps-casting' || val === 'fuji-trigger') {
+          card.style.display = 'none';
+        } else {
+          card.style.display = '';
+        }
+      }
+    });
+
+    // Set default reel seat based on rod style
+    if (quizData.rodStyle === 'casting') {
+      if (quizData.reelseat === 'fuji-dps-spinning' || quizData.reelseat === 'fuji-skeleton') {
+        quizData.reelseat = 'fuji-dps-casting';
+      }
+    } else {
+      if (quizData.reelseat === 'fuji-dps-casting' || quizData.reelseat === 'fuji-trigger') {
+        quizData.reelseat = 'fuji-dps-spinning';
+      }
+    }
+    var activeReelseat = document.querySelector('[data-reelseat="' + quizData.reelseat + '"]');
+    allReelseats.forEach(function (c) { c.classList.remove('selected'); });
+    if (activeReelseat) activeReelseat.classList.add('selected');
+  }
+
+  function configureLengthSlider() {
+    var slider = document.getElementById('length-slider');
+    var display = document.getElementById('length-display');
+    if (!slider || !display) return;
+
+    var values = getLengthValues(quizData.fishingType);
+    var config = lengthsByFishingType[quizData.fishingType] || lengthsByFishingType['other'];
+
+    slider.min = 0;
+    slider.max = values.length - 1;
+    slider.step = 1;
+
+    // Find closest index to default
+    var defaultVal = config.default;
+    var closestIdx = 0;
+    var closestDist = Math.abs(values[0] - defaultVal);
+    for (var i = 1; i < values.length; i++) {
+      var dist = Math.abs(values[i] - defaultVal);
+      if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+    }
+
+    slider.value = closestIdx;
+    quizData.length = values[closestIdx];
+    display.textContent = formatLength(values[closestIdx]);
+
+    slider._lengthValues = values;
+
+    slider.oninput = function () {
+      var idx = parseInt(slider.value);
+      var val = values[idx];
+      quizData.length = val;
+      display.textContent = formatLength(val);
+      updateRodPreview();
+      updatePriceDisplay();
+    };
   }
 
   function updateRodPreview() {
@@ -332,7 +520,6 @@
     var gripColor = gripColorMap[quizData.grip] || '#c4935a';
     var reelseatColor = reelseatColorMap[quizData.reelseat] || '#555555';
 
-    // Update SVG elements by class
     var blanks = preview.querySelectorAll('.svg-blank');
     blanks.forEach(function (el) { el.setAttribute('fill', 'var(--accent)'); el.style.fill = 'var(--accent)'; });
 
@@ -340,12 +527,9 @@
     wraps.forEach(function (el) { el.setAttribute('fill', wrapColor); el.style.fill = wrapColor; });
 
     var guides = preview.querySelectorAll('.svg-guide');
-    var scale = guideSizeMap[quizData.guideType] || 1;
     guides.forEach(function (el) {
       el.setAttribute('stroke', wrapColor);
       el.style.stroke = wrapColor;
-      el.style.transform = 'scale(' + scale + ')';
-      el.style.transformOrigin = 'center bottom';
     });
 
     var handles = preview.querySelectorAll('.svg-handle');
@@ -357,15 +541,13 @@
     var reel = preview.querySelectorAll('.svg-reelseat');
     reel.forEach(function (el) { el.setAttribute('fill', reelseatColor); el.style.fill = reelseatColor; });
 
-    // Update rod blank width based on length
     var svg = preview.querySelector('svg');
     if (svg) {
-      var w = lengthWidthMap[quizData.length] || 320;
-      var ratio = w / 320;
+      var baseWidth = 320;
+      var ratio = (quizData.length / 7.0);
       svg.style.transform = 'rotate(-2deg) scaleX(' + ratio + ')';
     }
 
-    // Update wrap pattern visual on guides
     var patternClass = 'pattern-' + quizData.wrapPattern;
     var assembly = preview.querySelector('.rod-assembly-svg');
     if (assembly) {
@@ -381,6 +563,18 @@
   }
 
   function getMessaging(data) {
+    if (data.technique === 'trolling') {
+      return { heading: "Let's Build Your Trolling Workhorse" };
+    }
+    if (data.technique === 'finesse') {
+      return { heading: "Let's Dial In Your Finesse Setup" };
+    }
+    if (data.technique === 'frogging') {
+      return { heading: "Let's Build Something That Rips Through Cover" };
+    }
+    if (data.technique === 'dryfly') {
+      return { heading: "Let's Craft Your Perfect Fly Rod" };
+    }
     if (data.experience === 'guide' && data.orderType === 'bulk') {
       return { heading: "Let's Design Your Fleet's Signature Rod" };
     }
@@ -408,7 +602,7 @@
       if (Array.isArray(val)) {
         if (val.length) params.set(key, val.join(','));
       } else if (val !== null) {
-        params.set(key, val);
+        params.set(key, String(val));
       }
     });
     return window.location.origin + window.location.pathname + '?build=' + btoa(params.toString());
@@ -424,6 +618,8 @@
       params.forEach(function (val, key) {
         if (key === 'priorities') {
           quizData[key] = val.split(',');
+        } else if (key === 'length') {
+          quizData[key] = parseFloat(val);
         } else if (key in quizData) {
           quizData[key] = val;
         }
@@ -464,7 +660,6 @@
 
   function startSocialProof() {
     if (socialProofTimer) return;
-    // Show first one after 8 seconds, then every 25 seconds
     socialProofTimer = setTimeout(function () {
       showSocialProof();
       socialProofTimer = setInterval(function () {
@@ -484,8 +679,7 @@
   }
 
   function showSocialProof() {
-    // Only show during builder step
-    if (currentStep !== 6) { stopSocialProof(); return; }
+    if (currentStep !== 8) { stopSocialProof(); return; }
 
     var toast = document.getElementById('social-proof-toast');
     if (!toast) return;
@@ -524,9 +718,14 @@
 
   function buildChips(containerId) {
     var container = document.getElementById(containerId);
+    if (!container) return;
     var chips = [];
 
     if (quizData.fishingType) chips.push(labelMap[quizData.fishingType] || quizData.fishingType);
+    if (quizData.rodStyle) chips.push(labelMap[quizData.rodStyle] || quizData.rodStyle);
+    if (quizData.technique) chips.push(labelMap[quizData.technique] || quizData.technique);
+    if (quizData.power) chips.push('Power: ' + quizData.power);
+    if (quizData.action) chips.push('Action: ' + quizData.action);
     if (quizData.orderType) chips.push(labelMap[quizData.orderType] || quizData.orderType);
     quizData.priorities.forEach(function (p) {
       chips.push(labelMap[p] || p);
@@ -535,12 +734,14 @@
     if (quizData.budget) chips.push(labelMap[quizData.budget] || quizData.budget);
 
     if (containerId === 'quote-summary') {
+      chips.push('Blank: ' + (labelMap[quizData.blankMaterial] || quizData.blankMaterial));
       chips.push('Handle: ' + (labelMap[quizData.handle] || quizData.handle));
       chips.push('Reel Seat: ' + (labelMap[quizData.reelseat] || quizData.reelseat));
       chips.push('Wrap: ' + (colorNameMap[quizData.wrapColor] || quizData.wrapColor));
+      chips.push('Trim: ' + (trimColorNameMap[quizData.trimColor] || quizData.trimColor));
       chips.push('Pattern: ' + (labelMap[quizData.wrapPattern] || quizData.wrapPattern));
-      chips.push('Length: ' + (labelMap[quizData.length] || quizData.length));
-      chips.push('Guides: ' + (labelMap[quizData.guideType] || quizData.guideType));
+      chips.push('Length: ' + formatLength(quizData.length));
+      chips.push('Guides: ' + (labelMap[quizData.guideRing] || quizData.guideRing));
       chips.push('Grip: ' + (labelMap[quizData.grip] || quizData.grip));
 
       var price = calculatePrice();
@@ -581,37 +782,40 @@
       notes: form.querySelector('#notes').value.trim(),
       quiz: {
         fishingType: quizData.fishingType,
+        rodStyle: quizData.rodStyle,
+        technique: quizData.technique,
+        power: quizData.power,
+        action: quizData.action,
         orderType: quizData.orderType,
         priorities: quizData.priorities,
         experience: quizData.experience,
         budget: quizData.budget
       },
       build: {
+        blankMaterial: quizData.blankMaterial,
         handle: quizData.handle,
         reelseat: quizData.reelseat,
         wrapColor: quizData.wrapColor,
+        trimColor: quizData.trimColor,
         wrapPattern: quizData.wrapPattern,
-        length: quizData.length,
-        guideType: quizData.guideType,
+        length: formatLength(quizData.length),
+        guideRing: quizData.guideRing,
         grip: quizData.grip
       },
       estimatedPrice: calculatePrice()
     };
 
-    // TODO: POST to webhook endpoint (Formspree, n8n, etc.)
     console.log('Quote request submitted:', JSON.stringify(formData, null, 2));
 
-    goToStep(8);
+    goToStep(10);
   }
 
   // --- Init ---
 
   document.addEventListener('DOMContentLoaded', function () {
-    // Check for shared build link
     var hasBuild = decodeBuild();
     if (hasBuild) {
-      // Jump straight to builder with decoded data
-      setTimeout(function () { goToStep(6); }, 100);
+      setTimeout(function () { goToStep(8); }, 100);
     }
 
     // Start button
@@ -622,10 +826,10 @@
     // Back button
     backBtn.addEventListener('click', goBack);
 
-    // Quiz cards (single-select)
+    // Quiz cards (single-select) — excludes technique cards (built dynamically) and priorities
     document.querySelectorAll('.quiz-card').forEach(function (card) {
       var field = card.getAttribute('data-field');
-      if (field && field !== 'priorities') {
+      if (field && field !== 'priorities' && field !== 'technique') {
         card.addEventListener('click', function () { handleQuizCard(card); });
       }
     });
@@ -637,7 +841,17 @@
 
     // Priorities next button
     document.getElementById('priorities-next').addEventListener('click', function () {
-      goToStep(4);
+      goToStep(6);
+    });
+
+    // Blank material options
+    document.querySelectorAll('[data-blankmaterial]').forEach(function (card) {
+      card.addEventListener('click', function () {
+        quizData.blankMaterial = card.getAttribute('data-blankmaterial');
+        selectOption(card.parentElement, 'data-blankmaterial', quizData.blankMaterial);
+        updateRodPreview();
+        updatePriceDisplay();
+      });
     });
 
     // Handle options
@@ -671,32 +885,31 @@
       });
     });
 
-    // Color swatches
-    document.querySelectorAll('.color-swatch').forEach(function (swatch) {
+    // Primary color swatches
+    document.querySelectorAll('.color-swatch:not(.trim-swatch)').forEach(function (swatch) {
       swatch.addEventListener('click', function () {
         quizData.wrapColor = swatch.getAttribute('data-color');
-        document.querySelectorAll('.color-swatch').forEach(function (s) { s.classList.remove('selected'); });
+        document.querySelectorAll('.color-swatch:not(.trim-swatch)').forEach(function (s) { s.classList.remove('selected'); });
         swatch.classList.add('selected');
         updateRodPreview();
       });
     });
 
-    // Length segments
-    document.querySelectorAll('.length-seg').forEach(function (seg) {
-      seg.addEventListener('click', function () {
-        quizData.length = seg.getAttribute('data-length');
-        document.querySelectorAll('.length-seg').forEach(function (s) { s.classList.remove('selected'); });
-        seg.classList.add('selected');
+    // Trim/accent color swatches
+    document.querySelectorAll('.trim-swatch').forEach(function (swatch) {
+      swatch.addEventListener('click', function () {
+        quizData.trimColor = swatch.getAttribute('data-trim');
+        document.querySelectorAll('.trim-swatch').forEach(function (s) { s.classList.remove('selected'); });
+        swatch.classList.add('selected');
         updateRodPreview();
-        updatePriceDisplay();
       });
     });
 
-    // Guide type options
-    document.querySelectorAll('[data-guidetype]').forEach(function (card) {
+    // Guide ring options
+    document.querySelectorAll('[data-guidering]').forEach(function (card) {
       card.addEventListener('click', function () {
-        quizData.guideType = card.getAttribute('data-guidetype');
-        selectOption(card.parentElement, 'data-guidetype', quizData.guideType);
+        quizData.guideRing = card.getAttribute('data-guidering');
+        selectOption(card.parentElement, 'data-guidering', quizData.guideRing);
         updateRodPreview();
         updatePriceDisplay();
       });
@@ -714,13 +927,16 @@
 
     // Continue to quote
     document.getElementById('to-quote-btn').addEventListener('click', function () {
-      goToStep(7);
+      goToStep(9);
     });
 
     // Skip to quote
-    document.getElementById('skip-to-quote').addEventListener('click', function () {
-      goToStep(7);
-    });
+    var skipBtn = document.getElementById('skip-to-quote');
+    if (skipBtn) {
+      skipBtn.addEventListener('click', function () {
+        goToStep(9);
+      });
+    }
 
     // Save build link
     var saveBtn = document.getElementById('save-build-btn');

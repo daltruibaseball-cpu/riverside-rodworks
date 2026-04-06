@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#0f1419"/>
+  <defs>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7a8a6a"/>
+      <stop offset="30%" stop-color="#6a7a5a"/>
+      <stop offset="70%" stop-color="#5a6a4a"/>
+      <stop offset="100%" stop-color="#4a5a3a"/>
+    </linearGradient>
+    <linearGradient id="translucent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.12)"/>
+      <stop offset="40%" stop-color="rgba(255,255,255,0.05)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  <!-- Rod blank section -->
+  <rect x="30" y="110" width="340" height="80" rx="8" fill="url(#glass)"/>
+  <!-- Translucent sheen -->
+  <rect x="30" y="110" width="340" height="40" rx="8" fill="url(#translucent)"/>
+  <!-- Tapered ends -->
+  <polygon points="30,110 20,125 20,175 30,190" fill="#1a1a1a"/>
+  <polygon points="370,110 380,120 380,180 370,190" fill="#1a1a1a"/>
+  <!-- Glass fiber lines (horizontal) -->
+  <line x1="35" y1="125" x2="365" y2="125" stroke="#8a9a7a" stroke-width="0.5" opacity="0.3"/>
+  <line x1="35" y1="135" x2="365" y2="135" stroke="#8a9a7a" stroke-width="0.5" opacity="0.3"/>
+  <line x1="35" y1="145" x2="365" y2="145" stroke="#8a9a7a" stroke-width="0.5" opacity="0.3"/>
+  <line x1="35" y1="155" x2="365" y2="155" stroke="#8a9a7a" stroke-width="0.5" opacity="0.3"/>
+  <line x1="35" y1="165" x2="365" y2="165" stroke="#8a9a7a" stroke-width="0.5" opacity="0.3"/>
+  <line x1="35" y1="175" x2="365" y2="175" stroke="#8a9a7a" stroke-width="0.5" opacity="0.3"/>
+  <!-- Subtle cross-fiber -->
+  <line x1="80" y1="112" x2="90" y2="188" stroke="#7a8a6a" stroke-width="0.3" opacity="0.2"/>
+  <line x1="140" y1="112" x2="150" y2="188" stroke="#7a8a6a" stroke-width="0.3" opacity="0.2"/>
+  <line x1="200" y1="112" x2="210" y2="188" stroke="#7a8a6a" stroke-width="0.3" opacity="0.2"/>
+  <line x1="260" y1="112" x2="270" y2="188" stroke="#7a8a6a" stroke-width="0.3" opacity="0.2"/>
+  <line x1="320" y1="112" x2="330" y2="188" stroke="#7a8a6a" stroke-width="0.3" opacity="0.2"/>
+  <text x="200" y="260" text-anchor="middle" fill="#6b7280" font-family="system-ui" font-size="11" letter-spacing="2">FIBERGLASS BLANK</text>
+</svg>

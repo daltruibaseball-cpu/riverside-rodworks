@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#0f1419"/>
+  <defs>
+    <linearGradient id="eva" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a3a3a"/>
+      <stop offset="50%" stop-color="#2d2d2d"/>
+      <stop offset="100%" stop-color="#222222"/>
+    </linearGradient>
+    <linearGradient id="highlight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.08)"/>
+      <stop offset="50%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <filter id="foam">
+      <feTurbulence type="turbulence" baseFrequency="1.5" numOctaves="3" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feBlend in="SourceGraphic" in2="grayNoise" mode="soft-light"/>
+    </filter>
+  </defs>
+  <rect x="20" y="145" width="360" height="10" rx="5" fill="#1a1a1a"/>
+  <!-- EVA foam handle -->
+  <rect x="60" y="118" width="280" height="64" rx="12" fill="url(#eva)" filter="url(#foam)"/>
+  <rect x="60" y="118" width="280" height="32" rx="12" fill="url(#highlight)"/>
+  <!-- End caps -->
+  <rect x="52" y="124" width="14" height="52" rx="4" fill="#1a1a1a" stroke="#444" stroke-width="0.5"/>
+  <rect x="334" y="124" width="14" height="52" rx="4" fill="#1a1a1a" stroke="#444" stroke-width="0.5"/>
+  <!-- Subtle texture lines -->
+  <line x1="100" y1="120" x2="100" y2="180" stroke="#444" stroke-width="0.3" opacity="0.4"/>
+  <line x1="140" y1="120" x2="140" y2="180" stroke="#444" stroke-width="0.3" opacity="0.4"/>
+  <line x1="180" y1="120" x2="180" y2="180" stroke="#444" stroke-width="0.3" opacity="0.4"/>
+  <line x1="220" y1="120" x2="220" y2="180" stroke="#444" stroke-width="0.3" opacity="0.4"/>
+  <line x1="260" y1="120" x2="260" y2="180" stroke="#444" stroke-width="0.3" opacity="0.4"/>
+  <line x1="300" y1="120" x2="300" y2="180" stroke="#444" stroke-width="0.3" opacity="0.4"/>
+  <text x="200" y="270" text-anchor="middle" fill="#6b7280" font-family="system-ui" font-size="11" letter-spacing="2">EVA FOAM HANDLE</text>
+</svg>

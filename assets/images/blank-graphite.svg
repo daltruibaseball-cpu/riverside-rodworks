@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#0f1419"/>
+  <defs>
+    <linearGradient id="graphite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a3a3a"/>
+      <stop offset="30%" stop-color="#2e2e2e"/>
+      <stop offset="70%" stop-color="#252525"/>
+      <stop offset="100%" stop-color="#1e1e1e"/>
+    </linearGradient>
+    <pattern id="carbon" width="8" height="8" patternUnits="userSpaceOnUse">
+      <rect width="8" height="8" fill="#2a2a2a"/>
+      <path d="M0,0 L4,4 L8,0" fill="none" stroke="#383838" stroke-width="0.5"/>
+      <path d="M0,4 L4,8 L8,4" fill="none" stroke="#333" stroke-width="0.5"/>
+    </pattern>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.08)"/>
+      <stop offset="40%" stop-color="rgba(255,255,255,0.03)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  <!-- Rod blank section -->
+  <rect x="30" y="110" width="340" height="80" rx="8" fill="url(#graphite)"/>
+  <!-- Carbon weave pattern overlay -->
+  <rect x="30" y="110" width="340" height="80" rx="8" fill="url(#carbon)" opacity="0.6"/>
+  <!-- Top sheen -->
+  <rect x="30" y="110" width="340" height="40" rx="8" fill="url(#sheen)"/>
+  <!-- Tapered ends -->
+  <polygon points="30,110 20,125 20,175 30,190" fill="#1a1a1a"/>
+  <polygon points="370,110 380,120 380,180 370,190" fill="#1a1a1a"/>
+  <!-- Diagonal weave lines -->
+  <line x1="60" y1="110" x2="100" y2="190" stroke="#3a3a3a" stroke-width="0.5" opacity="0.4"/>
+  <line x1="100" y1="110" x2="140" y2="190" stroke="#3a3a3a" stroke-width="0.5" opacity="0.4"/>
+  <line x1="140" y1="110" x2="180" y2="190" stroke="#3a3a3a" stroke-width="0.5" opacity="0.4"/>
+  <line x1="180" y1="110" x2="220" y2="190" stroke="#3a3a3a" stroke-width="0.5" opacity="0.4"/>
+  <line x1="220" y1="110" x2="260" y2="190" stroke="#3a3a3a" stroke-width="0.5" opacity="0.4"/>
+  <line x1="260" y1="110" x2="300" y2="190" stroke="#3a3a3a" stroke-width="0.5" opacity="0.4"/>
+  <line x1="300" y1="110" x2="340" y2="190" stroke="#3a3a3a" stroke-width="0.5" opacity="0.4"/>
+  <!-- Opposite diagonal -->
+  <line x1="100" y1="190" x2="60" y2="110" stroke="#353535" stroke-width="0.5" opacity="0.3"/>
+  <line x1="140" y1="190" x2="100" y2="110" stroke="#353535" stroke-width="0.5" opacity="0.3"/>
+  <line x1="180" y1="190" x2="140" y2="110" stroke="#353535" stroke-width="0.5" opacity="0.3"/>
+  <line x1="220" y1="190" x2="180" y2="110" stroke="#353535" stroke-width="0.5" opacity="0.3"/>
+  <line x1="260" y1="190" x2="220" y2="110" stroke="#353535" stroke-width="0.5" opacity="0.3"/>
+  <line x1="300" y1="190" x2="260" y2="110" stroke="#353535" stroke-width="0.5" opacity="0.3"/>
+  <line x1="340" y1="190" x2="300" y2="110" stroke="#353535" stroke-width="0.5" opacity="0.3"/>
+  <text x="200" y="260" text-anchor="middle" fill="#6b7280" font-family="system-ui" font-size="11" letter-spacing="2">GRAPHITE / CARBON FIBER BLANK</text>
+</svg>

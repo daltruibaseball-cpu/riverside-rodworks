@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#0f1419"/>
+  <defs>
+    <linearGradient id="titanium" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7a7a8a"/>
+      <stop offset="50%" stop-color="#9a9aaa"/>
+      <stop offset="100%" stop-color="#7a7a8a"/>
+    </linearGradient>
+    <linearGradient id="torzite" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6a5a4a"/>
+      <stop offset="30%" stop-color="#8a7a68"/>
+      <stop offset="50%" stop-color="#9a8a78"/>
+      <stop offset="70%" stop-color="#8a7a68"/>
+      <stop offset="100%" stop-color="#6a5a4a"/>
+    </linearGradient>
+  </defs>
+  <!-- Titanium frame legs (thinner) -->
+  <line x1="175" y1="220" x2="192" y2="170" stroke="url(#titanium)" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="225" y1="220" x2="208" y2="170" stroke="url(#titanium)" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Titanium frame ring (outer) -->
+  <circle cx="200" cy="130" r="52" fill="none" stroke="url(#titanium)" stroke-width="3"/>
+  <!-- Torzite insert - ultra thin translucent -->
+  <circle cx="200" cy="130" r="44" fill="none" stroke="url(#torzite)" stroke-width="3.5"/>
+  <!-- Translucent effect -->
+  <circle cx="200" cy="130" r="44" fill="none" stroke="rgba(255,220,180,0.08)" stroke-width="3.5"/>
+  <!-- Inner opening -->
+  <circle cx="200" cy="130" r="40" fill="#0f1419"/>
+  <!-- Premium highlight -->
+  <path d="M162,95 A48,48 0 0,1 238,95" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+  <!-- Frame foot -->
+  <rect x="170" y="218" width="60" height="7" rx="3.5" fill="url(#titanium)"/>
+  <rect x="100" y="220" width="200" height="10" rx="5" fill="#2a2a2a"/>
+  <text x="200" y="275" text-anchor="middle" fill="#6b7280" font-family="system-ui" font-size="11" letter-spacing="2">FUJI TORZITE GUIDE</text>
+</svg>

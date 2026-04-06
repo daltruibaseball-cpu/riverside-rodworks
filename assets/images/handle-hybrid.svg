@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#0f1419"/>
+  <defs>
+    <linearGradient id="cork" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c4956a"/>
+      <stop offset="50%" stop-color="#b8875c"/>
+      <stop offset="100%" stop-color="#a67848"/>
+    </linearGradient>
+    <linearGradient id="eva" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a3a3a"/>
+      <stop offset="50%" stop-color="#2d2d2d"/>
+      <stop offset="100%" stop-color="#222222"/>
+    </linearGradient>
+    <linearGradient id="highlight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.12)"/>
+      <stop offset="50%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  <rect x="20" y="145" width="360" height="10" rx="5" fill="#2a2a2a"/>
+  <!-- Cork half (rear) -->
+  <rect x="60" y="118" width="140" height="64" rx="12" fill="url(#cork)"/>
+  <rect x="60" y="118" width="140" height="32" rx="12" fill="url(#highlight)"/>
+  <!-- EVA half (front) -->
+  <rect x="200" y="118" width="140" height="64" rx="12" fill="url(#eva)"/>
+  <rect x="200" y="118" width="140" height="32" rx="12" fill="url(#highlight)"/>
+  <!-- Junction ring -->
+  <rect x="196" y="116" width="8" height="68" rx="2" fill="#666" opacity="0.7"/>
+  <!-- End caps -->
+  <rect x="52" y="124" width="14" height="52" rx="4" fill="#7a6244"/>
+  <rect x="334" y="124" width="14" height="52" rx="4" fill="#1a1a1a" stroke="#444" stroke-width="0.5"/>
+  <text x="200" y="270" text-anchor="middle" fill="#6b7280" font-family="system-ui" font-size="11" letter-spacing="2">HYBRID HANDLE</text>
+</svg>
